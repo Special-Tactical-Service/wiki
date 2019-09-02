@@ -1,0 +1,109 @@
+$font_color: #1d1d1d;
+
+html, body {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+	color: $font_color;
+	background: #ffffff;
+}
+
+.menu {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	height: 90px;
+	padding: 0 40px 0 40px;
+
+	.logo {
+		width: 72px;
+		height: 72px;
+		margin: 0 40px 0 0;
+		background-image: url("../static/logo.png");
+		background-size: 72px 72px;
+	}
+
+	.search {
+		flex-grow: 1;
+
+		.input {
+			display: flex;
+			justify-content: left;
+			align-items: center;
+			border-width: 0;
+			border-radius: 3px;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+			width: 100%;
+			max-width: 500px;
+			font-size: 18px;
+			margin: 4px 0 0 0;
+		}
+
+		.material-icons {
+			font-size: 24px;
+			margin: 0 0 0 8px;
+		}
+
+		input {
+			width: 100%;
+			font-size: 18px;
+			padding: 8px;
+			margin: 0 8px 0 0;
+			border-width: 0;
+		}
+
+		input:focus {
+			outline: none;
+		}
+	}
+
+	.colormode {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.light, .dark {
+			width: 40px;
+			height: 40px;
+			background: #fff;
+			border: solid 1px #292929;
+		}
+
+		.dark {
+			background: #000;
+			border: solid 1px #000;
+		}
+
+		.light:hover, .dark:hover {
+			cursor: pointer;
+		}
+	}
+}
+
+.main {
+	padding: 0 40px 40px 40px;
+}
+
+.end {
+	box-sizing: border-box;
+	width: 100%;
+	bottom: 0;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	font-size: 10px;
+
+	a {
+		color: $font_color;
+		text-decoration: underline;
+	}
+}
+
+input {
+	font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+	line-height: 1;
+}
