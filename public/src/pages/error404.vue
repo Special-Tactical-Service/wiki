@@ -1,24 +1,23 @@
 <template>
-	<div>
-		<mainmenu></mainmenu>
+	<layout>
 		<h1>{{$t("message")}}</h1>
-	</div>
+	</layout>
 </template>
 
 <script>
-import mainmenu from "../components/menu.vue";
+import layout from "../components/layout.vue";
 
 export default {
 	components: {
-		mainmenu
+		layout
 	}
 }
 </script>
 
 <i18n>
 {
-	"en": {
-		"message": "#404 Page not found"
+	"de": {
+		"message": "#404 Seite nicht gefunden"
 	}
 }
 </i18n>

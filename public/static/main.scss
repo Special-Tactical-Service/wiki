@@ -1,6 +1,7 @@
 $font_color: #1d1d1d;
 
 html, body {
+	height: 100%;
 	margin: 0;
 	padding: 0;
 	font-size: 14px;
@@ -51,6 +52,7 @@ html, body {
 			padding: 8px;
 			margin: 0 8px 0 0;
 			border-width: 0;
+			background: none;
 		}
 
 		input:focus {
@@ -67,12 +69,12 @@ html, body {
 			width: 40px;
 			height: 40px;
 			background: #fff;
-			border: solid 1px #292929;
+			border: solid 1px #252525;
 		}
 
 		.dark {
-			background: #000;
-			border: solid 1px #000;
+			background: #252525;
+			border: solid 1px #fff;
 		}
 
 		.light:hover, .dark:hover {
@@ -106,4 +108,29 @@ input {
 	font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
 	line-height: 1;
+}
+
+.dark-mode {
+	html, body {
+		background: #252525;
+		color: #fff;
+	}
+
+	.menu {
+		.search {
+			.input {
+				background: #414141;
+			}
+		}
+	}
+
+	.end {
+		a {
+			color: #fff;
+		}
+	}
+
+	input {
+		color: #fff;
+	}
 }

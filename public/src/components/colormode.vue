@@ -9,10 +9,14 @@
 export default {
     methods: {
         lightMode() {
-            console.log("TODO switch to light mode");
+            let body = document.getElementsByTagName("html")[0];
+            body.classList.remove("dark-mode");
+            window.localStorage.setItem("dark-mode", false);
         },
         darkMode() {
-            console.log("TODO switch to dark mode");
+            let body = document.getElementsByTagName("html")[0];
+            body.classList.add("dark-mode");
+            window.localStorage.setItem("dark-mode", true);
         }
     }
 }

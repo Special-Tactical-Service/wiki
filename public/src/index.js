@@ -70,5 +70,13 @@ new Vue({
 	el: "#app",
 	store: NewStore(),
 	router,
-	i18n
+	i18n,
+	mounted() {
+		let darkMode = window.localStorage.getItem("dark-mode");
+
+		if(darkMode === "true") {
+			let body = document.getElementsByTagName("html")[0];
+			body.classList.add("dark-mode");
+		}
+	}
 });
