@@ -1,10 +1,11 @@
 $font_color: #1d1d1d;
+$font_size: 14px;
 
 html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	font-size: 14px;
+	font-size: $font_size;
 	font-family: 'Open Sans', sans-serif;
 	color: $font_color;
 	background: #ffffff;
@@ -18,6 +19,7 @@ html, body {
 	margin: 0 0 40px 0;
 
 	.logo {
+		display: block;
 		width: 72px;
 		height: 72px;
 		margin: 0 40px 0 0;
@@ -29,6 +31,7 @@ html, body {
 		flex-grow: 1;
 
 		.input {
+			position: relative;
 			display: flex;
 			justify-content: left;
 			align-items: center;
@@ -39,6 +42,27 @@ html, body {
 			max-width: 500px;
 			font-size: 18px;
 			margin: 32px 0 0 0;
+
+			.results {
+				width: 100%;
+				position: absolute;
+				left: 0;
+				top: 42px;
+				background: #fff;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				border-radius: 3px;
+
+				.result {
+					padding: 8px;
+					font-size: $font_size;
+					border-radius: 3px;
+				}
+
+				.result:hover {
+					background: #e1e1e1;
+					cursor: pointer;
+				}
+			}
 		}
 
 		.material-icons {
@@ -73,6 +97,7 @@ html, body {
 				border-radius: 3px;
 				color: #fff;
 				box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				text-decoration: none;
 			}
 
 			.object-label:hover {
@@ -112,6 +137,18 @@ html, body {
 
 .main {
 	padding: 0 40px 40px 40px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+
+	.content {
+		flex-grow: 1;
+		max-width: 880px;
+	}
+}
+
+.centered {
+	justify-content: center;
 }
 
 .end {
@@ -123,11 +160,16 @@ html, body {
 	justify-content: center;
 	align-items: center;
 	padding: 10px;
-	font-size: 10px;
+	font-size: 12px;
 
 	a {
 		color: $font_color;
 		text-decoration: underline;
+		margin: 0 8px 0 0;
+	}
+
+	span {
+		margin: 0 8px 0 0;
 	}
 }
 
@@ -140,7 +182,7 @@ html, body {
 }
 
 .orange {
-	background: #FFBA75;
+	background: #ff8c19;
 }
 
 .card {
@@ -172,10 +214,29 @@ html, body {
 	border-color: #FFBA75;
 }
 
+.label {
+	padding: 4px 6px 4px 6px;
+	margin: 0 4px 4px 0;
+	border-radius: 3px;
+	color: #fff;
+}
+
+.label:hover {
+	cursor: pointer;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
 input {
 	font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
 	line-height: 1;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: normal;
+	margin: 0 0 20px 0;
+	padding: 0;
 }
 
 .dark-mode {
@@ -188,6 +249,14 @@ input {
 		.search {
 			.input {
 				background: #414141;
+
+				.results {
+					background: #414141;
+
+					.result:hover {
+						background: #5b5b5b;
+					}
+				}
 			}
 		}
 	}

@@ -38,6 +38,11 @@ axios.interceptors.request.use((config) => {
 // router
 const routes = [
 	{path: "/", component: pages.Home},
+	{path: "/lists", component: pages.Lists},
+	{path: "/tags", component: pages.Tags},
+	{path: "/read", component: pages.Read},
+	{path: "/list", component: pages.List},
+	{path: "/tag", component: pages.Tag},
 	{path: "*", component: pages.Error404}
 ];
 

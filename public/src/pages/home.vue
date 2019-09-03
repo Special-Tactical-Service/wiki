@@ -1,19 +1,26 @@
 <template>
 	<layout>
-		<card color="blue" title="Foo Bar">
-			Hallo Welt
-		</card>
-		<card color="blue" title="Foo Bar">
-			Noch ein Artikel
-		</card>
-		<card color="blue" title="Foo Bar">
-			Weiterer Artikel, toll!
-		</card>
-		<card color="green" title="Woop Woop">
-			Eine Liste
-		</card>
-		<card color="green">Liste</card>
-		<card color="orange">Tag</card>
+		<template>
+			<h1>Artikel</h1>
+			<card color="blue" title="Foo Bar">
+				Hallo Welt
+			</card>
+			<card color="blue" title="Foo Bar">
+				Noch ein Artikel
+			</card>
+			<card color="blue" title="Foo Bar">
+				Weiterer Artikel, toll!
+			</card>
+			<card color="green" title="Woop Woop">
+				Eine Liste
+			</card>
+			<span class="label orange">Tag</span>
+			<span class="label orange">Tag</span>
+			<span class="label orange">Tag</span>
+		</template>
+		<template slot="right">
+			Filter
+		</template>
 	</layout>
 </template>
 

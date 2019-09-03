@@ -2,8 +2,7 @@
     <div v-bind:class="{
         'card': true,
         'card-blue': color === 'blue',
-        'card-green': color === 'green',
-        'card-orange': color === 'orange'
+        'card-green': color === 'green'
     }" v-on:click="$emit('click')">
         <div class="title" v-if="title">{{title}}</div>
         <slot></slot>

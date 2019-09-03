@@ -1,11 +1,20 @@
 <template>
     <div>
         <mainmenu></mainmenu>
-        <div class="main">
-            <slot></slot>
+        <div v-bind:class="{main: true, centered}">
+            <div class="content">
+                <slot></slot>
+            </div>
+            <div class="content-right">
+                <slot name="right"></slot>
+            </div>
         </div>
         <div class="end">
-            &copy; 2019 Special Tactical Service | <a href="" target="_blank">{{$t("link_imprint")}}</a> | <a href="" target="_blank">{{$t("link_privacy")}}</a> | <a href="https://emvi.com/" target="_blank">{{$t("link_powered_by")}}</a>
+            <span>&copy; 2019 Special Tactical Service</span>
+            <span>Version 1.0.0</span>
+            <a href="" target="_blank">{{$t("link_imprint")}}</a>
+            <a href="" target="_blank">{{$t("link_privacy")}}</a>
+            <a href="https://emvi.com/" target="_blank">{{$t("link_powered_by")}}</a>
         </div>
     </div>
 </template>
@@ -14,7 +23,8 @@
 import mainmenu from "../components/menu.vue";
 
 export default {
-    components: {mainmenu}
+    components: {mainmenu},
+    props: ["centered"]
 }
 </script>
 
