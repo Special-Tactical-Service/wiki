@@ -19,7 +19,7 @@
 			<span class="label orange">Tag</span>
 		</template>
 		<template slot="right">
-			Filter
+			TODO Filter und Tags
 		</template>
 	</layout>
 </template>

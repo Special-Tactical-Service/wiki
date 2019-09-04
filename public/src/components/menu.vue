@@ -4,16 +4,14 @@
 		<div class="search">
 			<div class="input">
 				<i class="material-icons">search</i>
-				<input type="text" :placeholder="$t('placeholder_search')" v-model="query" v-on:focus="showResults = true" v-on:blur="showResults = false" />
-				<div class="results" v-show="showResults && query.length > 2">
-					<div class="result">Test A</div>
-					<div class="result">Test B</div>
+				<input type="text" :placeholder="$t('placeholder_search')" v-model="query" v-on:focus="showResults = true" ref="queryfield" />
+				<div class="results" v-show="showResults && query.length > 2 && results.length > 0" ref="results">
+					<searchresult v-for="result in results" :key="result.id" :result="result"></searchresult>
 				</div>
 			</div>
 			<div class="objects">
 				<router-link to="/" v-bind:class="{'object-label blue': true, inactive: activeObject !== '/'}" v-on:click="switchObject('articles')">{{$t("label_articles")}}</router-link>
 				<router-link to="/lists" v-bind:class="{'object-label green': true, inactive: activeObject !== '/lists'}" v-on:click="switchObject('lists')">{{$t("label_lists")}}</router-link>
-				<router-link to="/tags" v-bind:class="{'object-label orange': true, inactive: activeObject !== '/tags'}" v-on:click="switchObject('tags')">{{$t("label_tags")}}</router-link>
 			</div>
 		</div>
 		<colormode></colormode>
@@ -22,9 +20,11 @@
 
 <script>
 import colormode from "./colormode.vue";
+import searchresult from "./searchresult.vue";
+import {debounce} from "../util/debounce";
 
 export default {
-	components: {colormode},
+	components: {colormode, searchresult},
 	data() {
 		return {
 			showResults: false,
@@ -44,9 +44,41 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		this.searchFunc = debounce(query => {
+			this.emvi.findAll(query)
+			.then(results => {
+				this.results = [];
+
+				for (let i = 0; i < results.articles_count; i++) {
+					results.articles[i].isArticle = true;
+					this.results.push(results.articles[i]);
+				}
+
+				for (let i = 0; i < results.lists_count; i++) {
+					results.lists[i].isList = true;
+					this.results.push(results.lists[i]);
+				}
+
+				for (let i = 0; i < results.tags_count; i++) {
+					results.tags[i].isTag = true;
+					this.results.push(results.tags[i]);
+				}
+			});
+		}, 300);
+
+		window.addEventListener("mouseup", e => {
+			let field = this.$refs.queryfield;
+			let results = this.$refs.results;
+
+			if(!results || (e.target !== field && e.target !== results && !results.contains(e.target))) {
+				this.showResults = false;
+			}
+		});
+	},
 	methods: {
 		search(query) {
-			console.log(query);
+			this.searchFunc(query);
 		}
 	}
 }

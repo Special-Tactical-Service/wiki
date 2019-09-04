@@ -2,7 +2,7 @@ $font_color: #1d1d1d;
 $font_size: 14px;
 
 html, body {
-	height: 100%;
+	min-height: 100%;
 	margin: 0;
 	padding: 0;
 	font-size: $font_size;
@@ -12,11 +12,16 @@ html, body {
 }
 
 .menu {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
 	display: flex;
 	justify-content: left;
 	align-items: center;
-	padding: 0 40px 0 40px;
-	margin: 0 0 40px 0;
+	padding: 0 40px 20px 40px;
+	background: #fff;
 
 	.logo {
 		display: block;
@@ -136,7 +141,7 @@ html, body {
 }
 
 .main {
-	padding: 0 40px 40px 40px;
+	padding: 140px 40px 120px 40px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
@@ -155,7 +160,7 @@ html, body {
 	box-sizing: border-box;
 	width: 100%;
 	bottom: 0;
-	position: absolute;
+	position: fixed;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -173,6 +178,55 @@ html, body {
 	}
 }
 
+.article-info, .article-tags {
+	margin: 0 0 20px 0;
+}
+
+.article-content {
+	line-height: 1.5;
+
+	.table-wrapper {
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
+
+	table {
+		width: 100%;
+		table-layout: fixed;
+
+		td {
+			padding: 4px;
+			margin: 0;
+			border-width: 0;
+			background: #f3f3f3;
+		}
+
+		th {
+			background: #6da5ff;
+		}
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+		max-height: 500px;
+		margin: 20px auto 20px auto;
+	}
+
+	u {
+		text-decoration: none;
+		background: #fff600;
+	}
+
+	hr {
+		width: 90%;
+		height: 1px;
+		margin: 20px auto 20px auto;
+		border-width: 0;
+		background: #e1e1e1;
+	}
+}
+
 .blue {
 	background: #198CFF;
 }
@@ -183,6 +237,18 @@ html, body {
 
 .orange {
 	background: #ff8c19;
+}
+
+.font-blue {
+	color: #198CFF;
+}
+
+.font-green {
+	color: #14CC52;
+}
+
+.font-orange {
+	color: #ff8c19;
 }
 
 .card {
@@ -232,11 +298,39 @@ input {
 	line-height: 1;
 }
 
-h1 {
+h1, h2, h3, h4 {
 	font-size: 24px;
 	font-weight: normal;
 	margin: 0 0 20px 0;
 	padding: 0;
+}
+
+h1.article-title {
+	font-size: 32px;
+	margin-bottom: 10px;
+}
+
+h2, h3, h4 {
+	font-size: 20px;
+	margin: 10px 0 10px 0;
+}
+
+h3 {
+	font-size: 18px;
+}
+
+h4 {
+	font-size: 16px;
+}
+
+p {
+	margin: 10px 0 10px 0;
+	padding: 0;
+}
+
+a {
+	color: #198CFF;
+	text-decoration: none;
 }
 
 .dark-mode {
@@ -246,6 +340,8 @@ h1 {
 	}
 
 	.menu {
+		background: #252525;
+
 		.search {
 			.input {
 				background: #414141;
@@ -264,6 +360,22 @@ h1 {
 	.end {
 		a {
 			color: #fff;
+		}
+	}
+
+	.article-content {
+		table {
+			td {
+				background: #414141;
+			}
+
+			th {
+				background: #5b5b5b;
+			}
+		}
+
+		u {
+			background: #514f00;
 		}
 	}
 
