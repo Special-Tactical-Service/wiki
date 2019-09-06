@@ -13,8 +13,8 @@
             <div class="article-content" v-html="content" ref="content"></div>
         </template>
         <template slot="right">
-            <h2>{{$t("title_toc")}}</h2>
             <span class="toc">
+                <h2>{{$t("title_toc")}}</h2>
                 <span class="toc-l1" v-for="title in toc" :key="title.id">
                     <span class="title" v-on:click="scrollTo(title)">{{title.text}}</span><br />
                     <span class="toc-l2" v-for="child in title.children" :key="child.id">

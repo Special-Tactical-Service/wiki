@@ -32,7 +32,7 @@ export default {
                 this.$router.push(`/list/${this.result.id}`);
             }
             else {
-                this.$router.push(`/tag/${this.result.id}`);
+                this.$router.push(`/tag/${this.result.name}`);
             }
         }
     }
