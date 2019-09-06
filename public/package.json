@@ -12,7 +12,7 @@
   "author": "Marvin Blum",
   "license": "MIT",
   "dependencies": {
-    "@emvi/api": "^0.2.0",
+    "@emvi/api": "^0.2.1",
     "axios": "^0.19.0",
     "moment": "^2.24.0",
     "vue": "^2.6.10",

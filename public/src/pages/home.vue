@@ -36,13 +36,13 @@ export default {
 	},
 	methods: {
 		loadArticles() {
-			this.emvi.findArticles("")
+			this.emvi.findArticles()
 			.then(results => {
 				this.articles = results.results;
 			});
 		},
 		loadTags() {
-			this.emvi.findTags("")
+			this.emvi.findTags()
 			.then(results => {
 				this.tags = results.results;
 			});
