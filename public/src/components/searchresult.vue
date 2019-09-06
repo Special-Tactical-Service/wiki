@@ -25,8 +25,6 @@ export default {
     props: ["result"],
     methods: {
         open() {
-            console.log("ok");
-
             if(this.result.isArticle) {
                 this.$router.push(`/read/${this.result.id}`);
             }
