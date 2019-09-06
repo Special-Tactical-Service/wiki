@@ -151,6 +151,11 @@ html, body {
 		max-width: 880px;
 		margin: 0 20px 0 0;
 	}
+
+	.content-right {
+		position: relative;
+		max-width: 20%;
+	}
 }
 
 .centered {
@@ -225,11 +230,18 @@ html, body {
 	}
 
 	hr {
-		width: 90%;
+		width: 80%;
 		height: 1px;
-		margin: 20px auto 20px auto;
+		margin: 40px auto 40px auto;
 		border-width: 0;
 		background: #e1e1e1;
+	}
+
+	h2 {
+		margin: 20px 0 20px 0;
+		border-width: 0 0 1px 0;
+		border-color: #e1e1e1;
+		border-style: solid;
 	}
 }
 
@@ -298,6 +310,28 @@ html, body {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
+.toc {
+	position: fixed;
+
+	.toc-l1 {
+		font-size: 20px;
+
+		.toc-l2 {
+			font-size: 16px;
+			color: #757575;
+			padding: 4px 0 4px 20px;
+		}
+	}
+
+	.title:hover {
+		color: #198CFF;
+	}
+}
+
+.toc-l1:hover, .toc-l2:hover {
+	cursor: pointer;
+}
+
 input {
 	font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
@@ -306,7 +340,7 @@ input {
 
 h1, h2, h3, h4 {
 	font-size: 24px;
-	font-weight: normal;
+	font-weight: bold;
 	margin: 0 0 20px 0;
 	padding: 0;
 }
@@ -317,16 +351,16 @@ h1.article-title {
 }
 
 h2, h3, h4 {
-	font-size: 20px;
+	font-size: 18px;
 	margin: 10px 0 10px 0;
 }
 
 h3 {
-	font-size: 18px;
+	font-size: 16px;
 }
 
 h4 {
-	font-size: 16px;
+	font-size: 14px;
 }
 
 p {

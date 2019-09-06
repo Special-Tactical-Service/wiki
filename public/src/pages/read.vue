@@ -1,5 +1,5 @@
 <template>
-    <layout centered="true">
+    <layout>
         <template>
             <h1 class="article-title">{{title}}</h1>
             <div class="article-info">
@@ -10,7 +10,18 @@
             <div class="article-tags">
                 <tag v-for="tag in tags" :key="tag.id" :tag="tag"></tag>
             </div>
-            <div class="article-content" v-html="content"></div>
+            <div class="article-content" v-html="content" ref="content"></div>
+        </template>
+        <template slot="right">
+            <h2>{{$t("title_toc")}}</h2>
+            <span class="toc">
+                <span class="toc-l1" v-for="title in toc" :key="title.id">
+                    <span class="title" v-on:click="scrollTo(title)">{{title.text}}</span><br />
+                    <span class="toc-l2" v-for="child in title.children" :key="child.id">
+                        <span class="title" v-on:click="scrollTo(child)">{{child.text}}</span><br />
+                    </span>
+                </span>
+            </span>
         </template>
     </layout>
 </template>
@@ -29,7 +40,8 @@ export default {
             published: new Date(),
             updated: new Date(),
             tags: [],
-            content: ""
+            content: "",
+            toc: {}
         };
     },
     mounted() {
@@ -53,6 +65,11 @@ export default {
             let contentDOM = document.createElement("div");
             contentDOM.innerHTML = this.content;
             this.toc = buildTableOfContents(contentDOM);
+        },
+        scrollTo(title) {
+            let element = this.$refs.content.getElementsByTagName(title.tag)[title.number-1];
+            let top = element.getBoundingClientRect().top+window.scrollY-140;
+            window.scrollTo({top, behavior: "smooth"});
         }
     }
 }
@@ -61,6 +78,7 @@ export default {
 <i18n>
 {
     "de": {
+        "title_toc": "Inhalt",
         "views": "Aufrufe",
         "published": "veröffentlicht",
         "edited": "zuletzt bearbeitet"
