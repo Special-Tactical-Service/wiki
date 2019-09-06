@@ -179,8 +179,13 @@ html, body {
 	}
 }
 
+.article-info, .article-tags, .info {
+	margin: -20px 0 20px 0;
+	color: #757575;
+}
+
 .article-info, .article-tags {
-	margin: 0 0 20px 0;
+	margin-top: 0;
 }
 
 .article-content {
