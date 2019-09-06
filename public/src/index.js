@@ -45,7 +45,7 @@ const routes = [
 	{path: "/lists", component: pages.Lists},
 	{path: "/read/:id", component: pages.Read},
 	{path: "/list/:id", component: pages.List},
-	{path: "/tag/:id", component: pages.Tag},
+	{path: "/tag/:name", component: pages.Tag},
 	{path: "*", component: pages.Error404}
 ];
 
@@ -55,10 +55,10 @@ let router = new VueRouter({routes, mode: "history"});
 router.beforeEach((to, from, next) => {
 	if(to.meta.protected){
 		axios.get("http://localhost/auth/token")
-		.then((r) => {
+		.then(() => {
 			next();
 		})
-		.catch((e) => {
+		.catch(() => {
 			next("/");
 		});
 	}

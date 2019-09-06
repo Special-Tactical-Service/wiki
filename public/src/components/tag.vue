@@ -7,7 +7,7 @@ export default {
     props: ["tag"],
     methods: {
         visit() {
-            this.$router.push(`/tag/${this.tag.id}`);
+            this.$router.push(`/tag/${this.tag.name}`);
         }
     }
 }

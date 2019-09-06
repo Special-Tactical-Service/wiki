@@ -8,7 +8,7 @@
                 {{updated | moment("ll")}} {{$t("edited")}}
             </div>
             <div class="article-tags">
-                <span class="label orange" v-for="tag in tags" :key="tag.id">{{tag.name}}</span>
+                <tag v-for="tag in tags" :key="tag.id" :tag="tag"></tag>
             </div>
             <div class="article-content" v-html="content"></div>
         </template>
@@ -17,10 +17,11 @@
 
 <script>
 import layout from "../components/layout.vue";
+import tag from "../components/tag.vue";
 import {buildTableOfContents} from "../util/toc.js";
 
 export default {
-    components: {layout},
+    components: {layout, tag},
     data() {
         return {
             title: "",
