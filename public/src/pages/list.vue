@@ -21,8 +21,17 @@ export default {
     data() {
         return {
             list: {name: {}, def_time: new Date(), mod_time: new Date()},
+            entriesOffset: 0,
             entries: []
         };
+    },
+    watch: {
+        "$route.params.id": function(value) {
+            this.entriesOffset = 0;
+            this.entries = [];
+            this.loadList(value);
+            this.loadEntries(value);
+        }
     },
     mounted() {
         let id = this.$route.params.id;
@@ -37,9 +46,14 @@ export default {
             });
         },
         loadEntries(id) {
-            this.emvi.getListEntries(id)
+            this.emvi.getListEntries(id, null, {offset: this.entriesOffset})
             .then(results => {
-                this.entries = results.entries;
+                this.entries = this.entries.concat(results.entries);
+                this.entriesOffset += results.entries.length;
+
+                if(results.entries.length > 0) {
+                    this.loadEntries(id);
+                }
             });
         }
     }

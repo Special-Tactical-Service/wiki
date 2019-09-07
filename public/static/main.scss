@@ -39,6 +39,21 @@ html, body {
 	background: var(--light-to-dark);
 }
 
+.tv {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	background: repeating-linear-gradient(0deg, #252525 0px, #252525 1px, transparent 2px, transparent 5px);
+	background-size: 100% 4px;
+	animation: lines 2s ease-out infinite;
+	opacity: 0.2;
+	mix-blend-mode: color-burn;
+	pointer-events: none;
+}
+
 .menu {
 	position: fixed;
 	min-width: 964px;
@@ -287,6 +302,7 @@ html, body {
 	}
 
 	li > p {
+		padding: 0;
 		margin-bottom: 8px;
 	}
 
@@ -310,6 +326,7 @@ html, body {
 
 		th {
 			background: var(--grey);
+			text-align: left;
 		}
 	}
 
@@ -331,6 +348,22 @@ html, body {
 		margin: 16px 0;
 		border-width: 0;
 		background: var(--dark-to-white);
+	}
+
+	.file {
+		padding: 4px 8px;
+		color: var(--black-to-white);
+		background: var(--grey);
+		box-shadow: var(--border);
+
+		.file--size {
+			font-size: 14px;
+		}
+
+		&:hover {
+			color: var(--light-to-dark);
+			background: var(--black-to-white);
+		}
 	}
 
 	blockquote {
@@ -468,3 +501,13 @@ a {
 	color: #198CFF;
 	text-decoration: none;
 }
+ 
+@keyframes lines {
+	0% {
+		background-position:0px 0px;
+	}
+
+	100% {
+	   background-position:0px 24px;
+	}
+ }

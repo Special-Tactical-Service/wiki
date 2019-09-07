@@ -16,8 +16,17 @@ export default {
     data() {
         return {
             tag: {},
+            articlesOffset: 0,
             articles: []
         };
+    },
+    watch: {
+        "$route.params.name": function(value) {
+            this.articlesOffset = 0;
+            this.articles = [];
+            this.loadTag(value);
+            this.loadArticles(name);
+        }
     },
     mounted() {
         let name = this.$route.params.name;
@@ -32,9 +41,14 @@ export default {
             });
         },
         loadArticles(name) {
-            this.emvi.findArticles(null, {tags: name})
+            this.emvi.findArticles(null, {tags: name, offset: this.articlesOffset})
             .then(results => {
-                this.articles = results.results;
+                this.articles = this.articles.concat(results.articles);
+                this.articlesOffset = results.articles.length;
+
+                if(results.articles.length > 0) {
+                    this.loadArticles(name);
+                }
             });
         }
     }
