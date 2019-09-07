@@ -19,6 +19,7 @@ export default {
     components: {layout, listcard},
     data() {
         return {
+            offset: 0,
             lists: []
         };
     },
@@ -27,9 +28,14 @@ export default {
     },
     methods: {
         loadLists() {
-            this.emvi.findLists()
+            this.emvi.findLists(null, {offset: this.offset})
             .then(results => {
-                this.lists = results.results;
+                this.lists = this.lists.concat(results.lists);
+                this.offset += results.lists.length;
+
+                if(results.lists.length > 0) {
+                    this.loadLists();
+                }
             });
         }
     }
