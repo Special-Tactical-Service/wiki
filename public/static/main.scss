@@ -213,6 +213,7 @@ html, body {
 
 		th {
 			background: #6da5ff;
+			text-align: left;
 		}
 	}
 
@@ -241,6 +242,13 @@ html, body {
 		border-width: 0 0 1px 0;
 		border-color: #e1e1e1;
 		border-style: solid;
+	}
+
+	.file {
+		padding: 4px;
+		background: #919191;
+		border-radius: 3px;
+		color: #fff;
 	}
 }
 
