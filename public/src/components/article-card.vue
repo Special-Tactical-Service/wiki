@@ -1,8 +1,10 @@
 <template>
     <card color="blue" :title="article.latest_article_content.title" v-on:click="visit">
-        {{article.views}} {{$t("views")}} -
-        {{article.published | moment("ll")}} {{$t("published")}} -
-        {{article.mod_time | moment("ll")}} {{$t("edited")}}
+        <div class="info">
+            {{article.views}} {{$t("views")}} -
+            {{article.published | moment("ll")}} {{$t("published")}} -
+            {{article.mod_time | moment("ll")}} {{$t("edited")}}
+        </div>
     </card>
 </template>
 
