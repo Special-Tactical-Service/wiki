@@ -502,19 +502,12 @@ a {
 	text-decoration: none;
 }
  
- @keyframes giggle {
-	0%, 100% {
-	   transform:translate(-50%,-50%) translateY(-2px);
-	}
-	50% {
-	   transform:translate(-50%,-50%) translateY(2px);
-	}
- }
- @keyframes lines {
+@keyframes lines {
 	0% {
-	   background-position:0px 0px;
+		background-position:0px 0px;
 	}
+
 	100% {
-	   background-position:0px 25px;
+	   background-position:0px 24px;
 	}
  }
