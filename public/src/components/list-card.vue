@@ -1,8 +1,10 @@
 <template>
     <card color="green" :title="list.name.name" v-on:click="visit">
-        {{list.name.info}} -
-        {{list.def_time | moment("ll")}} {{$t("created")}} -
-        {{list.mod_time | moment("ll")}} {{$t("edited")}}
+        <div class="info">
+            {{list.name.info}} -
+            {{list.def_time | moment("ll")}} {{$t("created")}} -
+            {{list.mod_time | moment("ll")}} {{$t("edited")}}
+        </div>
     </card>
 </template>
 

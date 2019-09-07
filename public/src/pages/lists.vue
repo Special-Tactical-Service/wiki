@@ -1,12 +1,12 @@
 <template>
     <layout>
+        <template slot="left">
+            <!--<h2>{{$t("title_filter")}}</h2>
+			TODO-->
+        </template>
         <template>
             <h1>{{$t("title_lists")}}</h1>
             <listcard v-for="list in lists" :key="list.id" :list="list"></listcard>
-        </template>
-        <template slot="right">
-            <!--<h2>{{$t("title_filter")}}</h2>
-			TODO-->
         </template>
     </layout>
 </template>

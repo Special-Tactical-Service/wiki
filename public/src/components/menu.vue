@@ -1,6 +1,9 @@
 <template>
 	<div class="menu">
-		<router-link to="/" class="logo"></router-link>
+		<div class="logo">
+			<router-link to="/" class="icon"></router-link>
+			<div class="title">[sTs] Wiki</div>
+		</div>
 		<div class="search">
 			<div class="input">
 				<i class="material-icons">search</i>
@@ -9,10 +12,10 @@
 					<searchresult v-for="result in results" :key="result.id" :result="result"></searchresult>
 				</div>
 			</div>
-			<div class="objects">
-				<router-link to="/" v-bind:class="{'object-label blue': true, inactive: activeObject !== '/'}" v-on:click="switchObject('articles')">{{$t("label_articles")}}</router-link>
-				<router-link to="/lists" v-bind:class="{'object-label green': true, inactive: activeObject !== '/lists'}" v-on:click="switchObject('lists')">{{$t("label_lists")}}</router-link>
-			</div>
+		</div>
+		<div class="objects">
+			<router-link to="/" v-bind:class="{'object-label color-blue': true, inactive: activeObject !== '/'}" v-on:click="switchObject('articles')">{{$t("label_articles")}}</router-link>
+			<router-link to="/lists" v-bind:class="{'object-label color-green': true, inactive: activeObject !== '/lists'}" v-on:click="switchObject('lists')">{{$t("label_lists")}}</router-link>
 		</div>
 		<colormode></colormode>
 	</div>

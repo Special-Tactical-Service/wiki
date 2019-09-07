@@ -1,14 +1,14 @@
 <template>
 	<layout>
-		<template>
-			<h1>{{$t("title_articles")}}</h1>
-			<articlecard v-for="article in articles" :key="article.id" :article="article"></articlecard>
-		</template>
-		<template slot="right">
+		<template slot="left">
 			<!--<h2>{{$t("title_filter")}}</h2>
 			TODO-->
 			<h2>{{$t("title_tags")}}</h2>
 			<tag v-for="tag in tags" :key="tag.id" :tag="tag"></tag>
+		</template>
+		<template>
+			<h1>{{$t("title_articles")}}</h1>
+			<articlecard v-for="article in articles" :key="article.id" :article="article"></articlecard>
 		</template>
 	</layout>
 </template>

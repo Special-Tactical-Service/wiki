@@ -1,5 +1,14 @@
 <template>
     <layout>
+        <template slot="left">
+            <h2>{{$t("title_toc")}}</h2>
+            <div class="toc-l1" v-for="title in toc" :key="title.id">
+                <div class="title">{{title.text}}</div>
+                <div class="toc-l2" v-for="child in title.children" :key="child.id">
+                    <div class="title" v-on:click="scrollTo(child)">{{child.text}}</div>
+                </div>
+            </div>
+        </template>
         <template>
             <h1 class="article-title">{{title}}</h1>
             <div class="article-info">
@@ -11,17 +20,6 @@
                 <tag v-for="tag in tags" :key="tag.id" :tag="tag"></tag>
             </div>
             <div class="article-content" v-html="content" ref="content"></div>
-        </template>
-        <template slot="right">
-            <span class="toc">
-                <h2>{{$t("title_toc")}}</h2>
-                <span class="toc-l1" v-for="title in toc" :key="title.id">
-                    <span class="title" v-on:click="scrollTo(title)">{{title.text}}</span><br />
-                    <span class="toc-l2" v-for="child in title.children" :key="child.id">
-                        <span class="title" v-on:click="scrollTo(child)">{{child.text}}</span><br />
-                    </span>
-                </span>
-            </span>
         </template>
     </layout>
 </template>

@@ -2,7 +2,7 @@
     <layout>
         <template>
             <h1>{{list.name.name}}</h1>
-            <div class="info">
+            <div class="article-info">
                 {{list.name.info}} -
                 {{list.def_time | moment("ll")}} {{$t("created")}} -
                 {{list.mod_time | moment("ll")}} {{$t("edited")}}

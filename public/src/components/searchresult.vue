@@ -1,22 +1,24 @@
 <template>
     <div class="result" v-on:click="open">
-        <span v-if="result.isArticle">
-            <strong class="font-blue">{{result.latest_article_content.title}}</strong>
-            <br />
-            {{result.views}} {{$t("views")}} -
-            {{result.published | moment("ll")}} {{$t("published")}} -
-            {{result.mod_time | moment("ll")}} {{$t("edited")}}
-        </span>
-        <span v-if="result.isList">
-            <strong class="font-green">{{result.name.name}}</strong>
-            <br />
-            {{result.name.info}} -
-            {{result.def_time | moment("ll")}} {{$t("created")}} -
-            {{result.mod_time | moment("ll")}} {{$t("edited")}}
-        </span>
-        <span v-if="result.isTag">
-            <strong class="font-orange">{{result.name}}</strong>
-        </span>
+        <template v-if="result.isArticle">
+            <strong class="color-blue">{{result.latest_article_content.title}}</strong>
+            <div class="info">
+                {{result.views}} {{$t("views")}} -
+                {{result.published | moment("ll")}} {{$t("published")}} -
+                {{result.mod_time | moment("ll")}} {{$t("edited")}}
+            </div>
+        </template>
+        <template v-if="result.isList">
+            <strong class="color-green">{{result.name.name}}</strong>
+            <div class="info">
+                {{result.name.info}} -
+                {{result.def_time | moment("ll")}} {{$t("created")}} -
+                {{result.mod_time | moment("ll")}} {{$t("edited")}}
+            </div>
+        </template>
+        <template v-if="result.isTag">
+            <strong class="color-orange">{{result.name}}</strong>
+        </template>
     </div>
 </template>
 
