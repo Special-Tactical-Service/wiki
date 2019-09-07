@@ -1,14 +1,14 @@
 <template>
-    <span class="label orange" v-on:click="visit">{{tag.name}}</span>
+    <router-link :to="link" class="label">{{tag.name}}</router-link>
 </template>
 
 <script>
 export default {
     props: ["tag"],
-    methods: {
-        visit() {
-            this.$router.push(`/tag/${this.tag.name}`);
-        }
+    computed: {
+        link() {
+			return `/tag/${this.tag.name}`;
+		}
     }
 }
 </script>

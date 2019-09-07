@@ -245,11 +245,11 @@ html, body {
 	a {
 		color: var(--dark-to-white);
 		text-decoration: underline;
-		margin: 0 8px 0 0;
+		margin-right: 8px;
 	}
 
 	span {
-		margin: 0 8px 0 0;
+		margin-right: 8px;
 	}
 }
 
@@ -426,7 +426,7 @@ html, body {
 	box-shadow: var(--border);
 	cursor: pointer;
 
-	&:hover {
+	&:hover, &.router-link-exact-active {
 		color: var(--light-to-dark);
 		background: var(--dark-to-white);
 	}
