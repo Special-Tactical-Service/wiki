@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack --mode=production",
+    "build": "webpack --mode=production && node-sass static/ -o dist/",
     "dev": "webpack --watch",
     "style": "node-sass -w static/ -o dist/ --output-style compressed"
   },
