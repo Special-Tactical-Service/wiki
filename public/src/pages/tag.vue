@@ -16,6 +16,7 @@ export default {
     data() {
         return {
             tag: {},
+            articlesOffset: 0,
             articles: []
         };
     },
@@ -32,9 +33,14 @@ export default {
             });
         },
         loadArticles(name) {
-            this.emvi.findArticles(null, {tags: name})
+            this.emvi.findArticles(null, {tags: name, offset: this.articlesOffset})
             .then(results => {
-                this.articles = results.results;
+                this.articles = this.articles.concat(results.articles);
+                this.articlesOffset = results.articles.length;
+
+                if(results.articles.length > 0) {
+                    this.loadArticles(name);
+                }
             });
         }
     }
