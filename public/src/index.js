@@ -17,28 +17,6 @@ Vue.use(VueMoment);
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
 
-// reponse error handler
-axios.interceptors.response.use(undefined, err => {
-	if(err.response.data.error){
-		console.log(err.response.data.error);
-	}
-	
-	return Promise.reject(err);
-});
-
-// token interceptor for every request
-axios.interceptors.request.use((config) => {
-	const token = window.localStorage.getItem("token");
-
-	if(token){
-		config.headers.Authorization = `Bearer ${token}`;
-	}
-
-	return config;
-}, (err) => {
-	return Promise.reject(err);
-});
-
 // router
 const routes = [
 	{path: "/", component: pages.Home},
@@ -51,22 +29,6 @@ const routes = [
 
 let router = new VueRouter({routes, mode: "history"});
 
-// router interceptor to check token for protected pages
-router.beforeEach((to, from, next) => {
-	if(to.meta.protected){
-		axios.get("http://localhost/auth/token")
-		.then(() => {
-			next();
-		})
-		.catch(() => {
-			next("/");
-		});
-	}
-	else{
-		next();
-	}
-});
-
 // i18n
 const i18n = new VueI18n({
 	locale: "de",
@@ -74,11 +36,14 @@ const i18n = new VueI18n({
 });
 
 // Emvi API
+let clientId = "uh1wUT3E3Mm2fClaz9gS";
+let clientSecret = "W436DpuLjByH5HFEMbdo2oLm52WOnZEVHSF2VsVJo7PLdIvuRtauIQ1NIHeytRDu";
+let organization = "sts";
 let emviOptions = {
 	auth_host: "https://auth.emvi-integration.com", // TODO switch to production
 	api_host: "https://api.emvi-integration.com"
 };
-let emvi = new EmviClient("5JlZ3OFVvisEdyqwS4ca", "B6dtupb4FPP9dtGi984kMmLK9ZsQQ1bxtvbzDWgoKAsv3m6IRujWcKICqJ6v0SXn", "ststest", emviOptions);
+let emvi = new EmviClient(clientId, clientSecret, organization, emviOptions);
 
 Vue.mixin({
 	data() {
