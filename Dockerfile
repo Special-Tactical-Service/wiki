@@ -3,7 +3,7 @@ ADD . /go/src/github.com/special-tactical-service/wiki
 WORKDIR /go/src/github.com/special-tactical-service/wiki
 RUN apt update && \
 	apt upgrade -y && \
-	apt install curl  -y
+	apt install curl -y
 RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh && bash nodesource_setup.sh
 RUN apt-get install -y nodejs
 
@@ -14,7 +14,7 @@ RUN go build -ldflags "-s -w" main.go
 # build frontend
 RUN cd /go/src/github.com/special-tactical-service/wiki/public && npm i && npm rebuild node-sass && npm run build
 
-FROM alpine
+FROM ubuntu
 COPY --from=build /go/src/github.com/special-tactical-service/wiki /app
 WORKDIR /app
 
