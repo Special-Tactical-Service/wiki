@@ -44,6 +44,11 @@ export default {
             toc: {}
         };
     },
+    watch: {
+        "$route.params.id": function(value) {
+            this.loadArticle(value);
+        }
+    },
     mounted() {
         let id = this.$route.params.id;
         this.loadArticle(id);

@@ -20,6 +20,14 @@ export default {
             articles: []
         };
     },
+    watch: {
+        "$route.params.name": function(value) {
+            this.articlesOffset = 0;
+            this.articles = [];
+            this.loadTag(value);
+            this.loadArticles(name);
+        }
+    },
     mounted() {
         let name = this.$route.params.name;
         this.loadTag(name);

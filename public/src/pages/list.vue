@@ -25,6 +25,14 @@ export default {
             entries: []
         };
     },
+    watch: {
+        "$route.params.id": function(value) {
+            this.entriesOffset = 0;
+            this.entries = [];
+            this.loadList(value);
+            this.loadEntries(value);
+        }
+    },
     mounted() {
         let id = this.$route.params.id;
         this.loadList(id);
