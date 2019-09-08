@@ -26,10 +26,6 @@
 
 
 [[constraint]]
-  name = "github.com/assetto-corsa-web/accweb"
-  version = "1.4.0"
-
-[[constraint]]
   name = "github.com/gorilla/mux"
   version = "1.7.3"
 
@@ -39,7 +35,7 @@
 
 [[constraint]]
   name = "github.com/sirupsen/logrus"
-  version = "0.8.7"
+  version = "1.4.2"
 
 [prune]
   go-tests = true
