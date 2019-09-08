@@ -2,8 +2,8 @@
     <card color="blue" :title="article.latest_article_content.title" v-on:click="visit">
         <div class="info">
             {{article.views}} {{$t("views")}} -
-            {{article.published | moment("ll")}} {{$t("published")}} -
-            {{article.mod_time | moment("ll")}} {{$t("edited")}}
+            {{$t("created")}}: {{article.published | moment("ll")}} -
+            {{$t("edited")}}: {{article.mod_time | moment("ll")}}
         </div>
     </card>
 </template>
@@ -26,8 +26,8 @@ export default {
 {
     "de": {
         "views": "Aufrufe",
-        "published": "veröffentlicht",
-        "edited": "zuletzt bearbeitet"
+        "created": "Erstellt",
+        "edited": "Zuletzt bearbeitet"
     }
 }
 </i18n>

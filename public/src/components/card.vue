@@ -1,6 +1,6 @@
 <template>
     <div v-bind:class="{
-        'card': true,
+        'card no-select': true,
         'card-blue': color === 'blue',
         'card-green': color === 'green'
     }" v-on:click="$emit('click')">

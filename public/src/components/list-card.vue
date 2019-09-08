@@ -2,8 +2,8 @@
     <card color="green" :title="list.name.name" v-on:click="visit">
         <div class="info">
             {{list.name.info}} -
-            {{list.def_time | moment("ll")}} {{$t("created")}} -
-            {{list.mod_time | moment("ll")}} {{$t("edited")}}
+            {{$t("created")}}: {{list.def_time | moment("ll")}} -
+            {{$t("edited")}}: {{list.mod_time | moment("ll")}}
         </div>
     </card>
 </template>
@@ -25,8 +25,8 @@ export default {
 <i18n>
 {
     "de": {
-        "edited": "zuletzt bearbeitet",
-        "created": "erstellt"
+        "created": "Erstellt",
+        "edited": "Zuletzt bearbeitet"
     }
 }
 </i18n>

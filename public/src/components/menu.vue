@@ -1,19 +1,19 @@
 <template>
-	<div class="menu">
-		<div class="logo">
-			<router-link to="/" class="icon"></router-link>
+	<div class="menu no-select">
+		<router-link to="/" class="logo">
+			<div class="icon"></div>
 			<div class="title">[sTs] Wiki</div>
-		</div>
+		</router-link>
 		<div class="search">
 			<div class="input">
-				<i class="material-icons">search</i>
+				<i class="material-icons no-select">search</i>
 				<input type="text" :placeholder="$t('placeholder_search')" v-model="query" v-on:focus="showResults = true" ref="queryfield" />
-				<div class="results" v-show="showResults && query.length > 2 && results.length > 0" ref="results">
+				<div class="results no-select" v-show="showResults && query.length > 2 && results.length > 0" ref="results">
 					<searchresult v-for="result in results" :key="result.id" :result="result"></searchresult>
 				</div>
 			</div>
 		</div>
-		<div class="objects">
+		<div class="objects no-select">
 			<router-link to="/" v-bind:class="{'object-label color-blue': true, inactive: activeObject !== '/'}" v-on:click="switchObject('articles')">{{$t("label_articles")}}</router-link>
 			<router-link to="/lists" v-bind:class="{'object-label color-green': true, inactive: activeObject !== '/lists'}" v-on:click="switchObject('lists')">{{$t("label_lists")}}</router-link>
 		</div>
@@ -90,7 +90,7 @@ export default {
 <i18n>
 {
 	"de": {
-		"placeholder_search": "Suche...",
+		"placeholder_search": "Suchen...",
 		"label_articles": "Artikel",
 		"label_lists": "Listen",
 		"label_tags": "Tags"

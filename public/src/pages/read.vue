@@ -3,20 +3,20 @@
         <template slot="left">
             <h2>{{$t("title_toc")}}</h2>
             <div class="toc-l1" v-for="title in toc" :key="title.id">
-                <div class="title">{{title.text}}</div>
+                <div class="title" v-on:click="scrollTo(title)">{{title.text}}</div>
                 <div class="toc-l2" v-for="child in title.children" :key="child.id">
                     <div class="title" v-on:click="scrollTo(child)">{{child.text}}</div>
                 </div>
             </div>
         </template>
         <template>
-            <h1 class="article-title">{{title}}</h1>
-            <div class="article-info">
+            <h1 class="article-title no-select">{{title}}</h1>
+            <div class="article-info no-select">
                 {{views}} {{$t("views")}} -
-                {{published | moment("ll")}} {{$t("published")}} -
-                {{updated | moment("ll")}} {{$t("edited")}}
+                {{$t("created")}}: {{published | moment("ll")}} -
+                {{$t("edited")}}: {{updated | moment("ll")}}
             </div>
-            <div class="article-tags">
+            <div class="article-tags no-select">
                 <tag v-for="tag in tags" :key="tag.id" :tag="tag"></tag>
             </div>
             <div class="article-content" v-html="content" ref="content"></div>
@@ -83,8 +83,8 @@ export default {
     "de": {
         "title_toc": "Inhalt",
         "views": "Aufrufe",
-        "published": "veröffentlicht",
-        "edited": "zuletzt bearbeitet"
+        "created": "Erstellt",
+        "edited": "Zuletzt bearbeitet"
     }
 }
 </i18n>
