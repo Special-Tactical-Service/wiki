@@ -9,7 +9,7 @@
 				<i class="material-icons">search</i>
 				<input type="text" :placeholder="$t('placeholder_search')" v-model="query" v-on:focus="showResults = true" ref="queryfield" />
 				<div class="results" v-show="showResults && query.length > 2 && results.length > 0" ref="results">
-					<searchresult v-for="result in results" :key="result.id" :result="result"></searchresult>
+					<searchresult v-for="result in results" :key="result.id" :result="result" v-on:close="showResults = false"></searchresult>
 				</div>
 			</div>
 		</div>
@@ -70,14 +70,20 @@ export default {
 			});
 		}, 300);
 
-		window.addEventListener("mouseup", e => {
+		this.mouseupHandler = e => {
+			console.log(e);
+
 			let field = this.$refs.queryfield;
 			let results = this.$refs.results;
 
 			if(!results || (e.target !== field && e.target !== results && !results.contains(e.target))) {
 				this.showResults = false;
 			}
-		});
+		};
+		window.addEventListener("mouseup", this.mouseupHandler);
+	},
+	beforeDestroy() {
+		window.removeEventListener("mouseup", this.mouseupHandler);
 	},
 	methods: {
 		search(query) {

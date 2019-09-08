@@ -36,6 +36,8 @@ export default {
             else {
                 this.$router.push(`/tag/${this.result.name}`);
             }
+
+            this.$emit("close");
         }
     }
 }
