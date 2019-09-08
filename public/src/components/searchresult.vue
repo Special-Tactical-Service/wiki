@@ -4,16 +4,16 @@
             <strong class="color-blue">{{result.latest_article_content.title}}</strong>
             <div class="info">
                 {{result.views}} {{$t("views")}} -
-                {{result.published | moment("ll")}} {{$t("published")}} -
-                {{result.mod_time | moment("ll")}} {{$t("edited")}}
+                {{$t("created")}}: {{result.published | moment("ll")}} -
+                {{$t("edited")}}: {{result.mod_time | moment("ll")}}
             </div>
         </template>
         <template v-if="result.isList">
             <strong class="color-green">{{result.name.name}}</strong>
             <div class="info">
                 {{result.name.info}} -
-                {{result.def_time | moment("ll")}} {{$t("created")}} -
-                {{result.mod_time | moment("ll")}} {{$t("edited")}}
+                {{$t("created")}}: {{result.def_time | moment("ll")}} -
+                {{$t("edited")}}: {{result.mod_time | moment("ll")}}
             </div>
         </template>
         <template v-if="result.isTag">
@@ -47,9 +47,8 @@ export default {
 {
     "de": {
         "views": "Aufrufe",
-        "published": "veröffentlicht",
-        "edited": "zuletzt bearbeitet",
-        "created": "erstellt"
+        "created": "Erstellt",
+        "edited": "Zuletzt bearbeitet"
     }
 }
 </i18n>

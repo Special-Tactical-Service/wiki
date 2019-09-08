@@ -3,7 +3,7 @@
         <div class="tv"></div>
         <mainmenu></mainmenu>
         <div v-bind:class="{main: true, centered}">
-            <div class="content-left">
+            <div class="content-left no-select">
                 <slot name="left"></slot>
                 <div class="end">
                     <span>&copy; 2019 Special Tactical Service</span>

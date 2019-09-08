@@ -1,11 +1,11 @@
 <template>
     <layout>
         <template>
-            <h1>{{list.name.name}}</h1>
-            <div class="article-info">
+            <h1 class="no-select">{{list.name.name}}</h1>
+            <div class="article-info no-select">
                 {{list.name.info}} -
-                {{list.def_time | moment("ll")}} {{$t("created")}} -
-                {{list.mod_time | moment("ll")}} {{$t("edited")}}
+                {{$t("created")}}: {{list.def_time | moment("ll")}} -
+                {{$t("edited")}}: {{list.mod_time | moment("ll")}}
             </div>
             <articlecard v-for="article in entries" :key="article.id" :article="article"></articlecard>
         </template>
@@ -63,8 +63,8 @@ export default {
 <i18n>
 {
     "de": {
-        "edited": "zuletzt bearbeitet",
-        "created": "erstellt"
+        "created": "Erstellt",
+        "edited": "Zuletzt bearbeitet"
     }
 }
 </i18n>

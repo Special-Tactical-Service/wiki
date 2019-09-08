@@ -7,7 +7,7 @@
 			<tag v-for="tag in tags" :key="tag.id" :tag="tag"></tag>
         </template>
         <template>
-            <h1>{{$t("title_lists")}}</h1>
+            <h1 class="no-select">{{$t("title_lists")}}</h1>
             <listcard v-for="list in lists" :key="list.id" :list="list"></listcard>
         </template>
     </layout>
