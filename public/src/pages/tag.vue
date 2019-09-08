@@ -36,7 +36,7 @@ export default {
             this.articlesOffset = 0;
             this.articles = [];
             this.loadTag(value);
-            this.loadArticles(name);
+            this.loadArticles(value);
         }
     },
     mounted() {
