@@ -1,5 +1,5 @@
 <template>
-    <div class="result" v-on:click="open">
+    <div v-bind:class="{result: true, selected}" v-on:click="visit">
         <template v-if="result.isArticle">
             <strong class="color-blue">{{result.latest_article_content.title}}</strong>
             <div class="info">
@@ -24,9 +24,9 @@
 
 <script>
 export default {
-    props: ["result"],
+    props: ["result", "selected"],
     methods: {
-        open() {
+        visit() {
             if(this.result.isArticle) {
                 this.$router.push(`/read/${this.result.id}`);
             }

@@ -7,9 +7,13 @@
 		<div class="search">
 			<div class="input">
 				<i class="material-icons">search</i>
-				<input type="text" :placeholder="$t('placeholder_search')" v-model="query" v-on:focus="showResults = true" ref="queryfield" />
-				<div class="results" v-show="showResults && query.length > 2 && results.length > 0" ref="results">
-					<searchresult v-for="result in results" :key="result.id" :result="result" v-on:close="showResults = false"></searchresult>
+				<input type="text" :placeholder="$t('placeholder_search')" v-model="searchquery" v-on:focus="focus" ref="queryfield" v-on:keyup="keyup" />
+				<div class="results" v-show="showResults && searchquery.length > 2 && results.length > 0" ref="results">
+					<searchresult v-for="(result, index) in results"
+						:key="result.id"
+						:result="result"
+						:selected="index === selected"
+						v-on:close="showResults = false"></searchresult>
 				</div>
 			</div>
 		</div>
@@ -31,8 +35,9 @@ export default {
 	data() {
 		return {
 			showResults: false,
-			query: "",
-			results: []
+			searchquery: "",
+			results: [],
+			selected: 0
 		}
 	},
 	computed: {
@@ -41,7 +46,7 @@ export default {
 		}
 	},
 	watch: {
-		query(value) {
+		searchquery(value) {
 			if(value.length > 2) {
 				this.search(value);
 			}
@@ -52,6 +57,7 @@ export default {
 			this.emvi.findAll(query)
 			.then(results => {
 				this.results = [];
+				this.selected = 0;
 
 				for (let i = 0; i < results.articles_count; i++) {
 					results.articles[i].isArticle = true;
@@ -71,8 +77,6 @@ export default {
 		}, 300);
 
 		this.mouseupHandler = e => {
-			console.log(e);
-
 			let field = this.$refs.queryfield;
 			let results = this.$refs.results;
 
@@ -88,7 +92,49 @@ export default {
 	methods: {
 		search(query) {
 			this.searchFunc(query);
-		}
+		},
+		focus() {
+			this.selected = 0;
+			this.showResults = true;
+		},
+		keyup(e) {
+			if(e.keyCode === 38) { // up
+				e.preventDefault();
+				this.selected--;
+
+				if(this.selected < 0) {
+					this.selected = this.results.length-1;
+				}
+			}
+			else if(e.keyCode === 40) { // down
+				e.preventDefault();
+				this.selected++;
+
+				if(this.selected > this.results.length-1) {
+					this.selected = 0;
+				}
+			}
+			else if(e.keyCode === 13) { // enter
+				e.preventDefault();
+				this.open();
+			}
+		},
+		open() {
+			let result = this.results[this.selected];
+
+            if(result.isArticle) {
+                this.$router.push(`/read/${result.id}`);
+            }
+            else if(result.isList) {
+                this.$router.push(`/list/${result.id}`);
+            }
+            else {
+                this.$router.push(`/tag/${result.name}`);
+            }
+
+            this.showResults = false;
+            this.$refs.queryfield.blur();
+        }
 	}
 }
 </script>
