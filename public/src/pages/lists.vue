@@ -49,7 +49,7 @@ export default {
 			});
 		},
         loadLists() {
-            this.emvi.findLists(null, {offset: this.offset})
+            this.emvi.findLists(null, {offset: this.offset, sort_name: "asc"})
             .then(results => {
                 this.lists = this.lists.concat(results.lists);
                 this.offset += results.lists.length;

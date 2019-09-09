@@ -38,7 +38,7 @@ export default {
 	},
 	methods: {
 		loadArticles() {
-			this.emvi.findArticles(null, {offset: this.articlesOffset})
+			this.emvi.findArticles(null, {offset: this.articlesOffset, sort_title: "asc"})
 			.then(results => {
 				this.articles = this.articles.concat(results.articles);
 				this.articlesOffset += results.articles.length;

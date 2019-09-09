@@ -64,7 +64,7 @@ export default {
             });
         },
         loadArticles(name) {
-            this.emvi.findArticles(null, {tags: name, offset: this.articlesOffset})
+            this.emvi.findArticles(null, {tags: name, offset: this.articlesOffset, sort_title: "asc"})
             .then(results => {
                 this.articles = this.articles.concat(results.articles);
                 this.articlesOffset = results.articles.length;
