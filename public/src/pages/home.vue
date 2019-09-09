@@ -8,6 +8,7 @@
 		</template>
 		<template>
 			<h1>{{$t("title_articles")}}</h1>
+			<articlecard v-for="article in pinned" :key="article.id" :article="article" pinned="true"></articlecard>
 			<articlecard v-for="article in articles" :key="article.id" :article="article"></articlecard>
 		</template>
 	</layout>
@@ -28,6 +29,7 @@ export default {
 		return {
 			articlesOffset: 0,
 			tagsOffset: 0,
+			pinned: [],
 			articles: [],
 			tags: []
 		};
@@ -37,6 +39,20 @@ export default {
 		this.loadTags();
 	},
 	methods: {
+		loadPinned() {
+			this.emvi.getPinned(true, false)
+			.then(results => {
+				for(let i = 0; i < results.articles.length; i++) {
+					for (let j = 0; j < this.articles.length; j++) {
+						if (this.articles[j].id === results.articles[i].id) {
+							this.pinned.push(this.articles[j]);
+							this.articles.splice(j, 1);
+							break;
+						}
+					}
+				}
+			});
+		},
 		loadArticles() {
 			this.emvi.findArticles(null, {offset: this.articlesOffset, sort_title: "asc"})
 			.then(results => {
@@ -45,6 +61,9 @@ export default {
 
 				if(results.articles.length > 0) {
 					this.loadArticles();
+				}
+				else {
+					this.loadPinned();
 				}
 			});
 		},

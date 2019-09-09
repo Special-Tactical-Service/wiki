@@ -8,6 +8,7 @@
         </template>
         <template>
             <h1 class="no-select">{{$t("title_lists")}}</h1>
+            <listcard v-for="list in pinned" :key="list.id" :list="list" pinned="true"></listcard>
             <listcard v-for="list in lists" :key="list.id" :list="list"></listcard>
         </template>
     </layout>
@@ -26,10 +27,11 @@ export default {
     },
     data() {
         return {
-            tagsOffset: 0,
-            tags: [],
             offset: 0,
-            lists: []
+            tagsOffset: 0,
+            pinned: [],
+            lists: [],
+            tags: []
         };
     },
     mounted() {
@@ -37,6 +39,20 @@ export default {
         this.loadLists();
     },
     methods: {
+        loadPinned() {
+            this.emvi.getPinned(false, true)
+            .then(results => {
+                for(let i = 0; i < results.lists.length; i++) {
+                    for (let j = 0; j < this.lists.length; j++) {
+                        if (this.lists[j].id === results.lists[i].id) {
+                            this.pinned.push(this.lists[j]);
+                            this.lists.splice(j, 1);
+                            break;
+                        }
+                    }
+                }
+            });
+        },
         loadTags() {
 			this.emvi.findTags(null, {offset: this.tagsOffset})
 			.then(results => {
@@ -56,6 +72,9 @@ export default {
 
                 if(results.lists.length > 0) {
                     this.loadLists();
+                }
+                else {
+                    this.loadPinned();
                 }
             });
         }

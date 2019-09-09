@@ -1,5 +1,5 @@
 <template>
-    <card color="blue" :title="article.latest_article_content.title" v-on:click="visit">
+    <card color="blue" :title="article.latest_article_content.title" v-on:click="visit" :pinned="pinned">
         <div class="info">
             {{article.views}} {{$t("views")}} -
             {{$t("created")}}: {{article.published | moment("ll")}} -
@@ -14,7 +14,7 @@ import card from "./card.vue";
 
 export default {
     components: {card},
-    props: ["article"],
+    props: ["article", "pinned"],
     methods: {
         visit() {
             let slug = slugify(`${this.article.latest_article_content.title}-${this.article.id}`);

@@ -1,5 +1,5 @@
 <template>
-    <card color="green" :title="list.name.name" v-on:click="visit">
+    <card color="green" :title="list.name.name" v-on:click="visit" :pinned="pinned">
         <div class="info">
             {{list.name.info}} -
             {{$t("created")}}: {{list.def_time | moment("ll")}} -
@@ -14,7 +14,7 @@ import card from "./card.vue";
 
 export default {
     components: {card},
-    props: ["list"],
+    props: ["list", "pinned"],
     methods: {
         visit() {
             let slug = slugify(`${this.list.name.name}-${this.list.id}`);
