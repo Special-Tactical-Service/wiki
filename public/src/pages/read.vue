@@ -28,6 +28,7 @@
 import layout from "../components/layout.vue";
 import tag from "../components/tag.vue";
 import {buildTableOfContents} from "../util/toc.js";
+import {idFromSlug} from "../util/slug.js";
 
 export default {
     components: {layout, tag},
@@ -44,11 +45,12 @@ export default {
     },
     watch: {
         "$route.params.id": function(value) {
-            this.loadArticle(value);
+            let id = idFromSlug(value);
+            this.loadArticle(id);
         }
     },
     mounted() {
-        let id = this.$route.params.id;
+        let id = idFromSlug(this.$route.params.id);
         this.loadArticle(id);
     },
     methods: {

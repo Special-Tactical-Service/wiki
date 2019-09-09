@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import slugify from "slugify";
 import card from "./card.vue";
 
 export default {
@@ -16,7 +17,8 @@ export default {
     props: ["article"],
     methods: {
         visit() {
-            this.$router.push(`/read/${this.article.id}`);
+            let slug = slugify(`${this.article.latest_article_content.title}-${this.article.id}`);
+            this.$router.push(`/read/${slug}`);
         }
     }
 }

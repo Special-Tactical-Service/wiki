@@ -29,6 +29,11 @@ const routes = [
 
 let router = new VueRouter({routes, mode: "history"});
 
+router.beforeEach((to, from, next) => {
+	window.scrollTo(0, 0);
+	next();
+});
+
 // i18n
 const i18n = new VueI18n({
 	locale: "de",

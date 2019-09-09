@@ -15,6 +15,7 @@
 <script>
 import layout from "../components/layout.vue";
 import articlecard from "../components/article-card.vue";
+import {idFromSlug} from "../util/slug.js";
 
 export default {
     components: {layout, articlecard},
@@ -27,14 +28,15 @@ export default {
     },
     watch: {
         "$route.params.id": function(value) {
+            let id = idFromSlug(value);
             this.entriesOffset = 0;
             this.entries = [];
-            this.loadList(value);
-            this.loadEntries(value);
+            this.loadList(id);
+            this.loadEntries(id);
         }
     },
     mounted() {
-        let id = this.$route.params.id;
+        let id = idFromSlug(this.$route.params.id);
         this.loadList(id);
         this.loadEntries(id);
     },

@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="link" class="label">{{tag.name}}</router-link>
+    <router-link :to="link" class="label">{{tag.name}} ({{tag.usages}})</router-link>
 </template>
 
 <script>
