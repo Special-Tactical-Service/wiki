@@ -510,6 +510,11 @@ html, body {
 		color: var(--light-to-dark);
 		background: var(--dark-to-light);
 	}
+
+	.dash {
+		font-weight: bold;
+		padding: 0 8px;
+	}
 }
 
 .toc-l1 {
