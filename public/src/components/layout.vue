@@ -8,8 +8,8 @@
                 <div class="end">
                     <span>&copy; 2019 Special Tactical Service</span>
                     <span>Version 1.0.0</span>
-                    <a href="" target="_blank">{{$t("link_imprint")}}</a>
-                    <a href="" target="_blank">{{$t("link_privacy")}}</a>
+                    <a href="https://sts.wtf/index.php?datenschutzerklaerung/" target="_blank">{{$t("link_imprint")}}</a>
+                    <a href="https://sts.wtf/index.php?datenschutzerklaerung/" target="_blank">{{$t("link_privacy")}}</a>
                     <a href="https://emvi.com/" target="_blank">{{$t("link_powered_by")}}</a>
                 </div>
             </div>
