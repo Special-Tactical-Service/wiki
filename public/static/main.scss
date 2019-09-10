@@ -76,7 +76,7 @@ html, body {
 	z-index: 1000;
 	background: repeating-linear-gradient(0deg, #252525 0px, #252525 1px, transparent 2px, transparent 5px);
 	background-size: 100% 4px;
-	animation: lines 2s ease-out infinite;
+	animation: lines 2s linear infinite;
 	opacity: 0.2;
 	mix-blend-mode: color-burn;
 	pointer-events: none;
@@ -121,8 +121,8 @@ html, body {
 		}
 	
 		.dark-mode &:hover .icon, .dark-mode &.router-link-exact-active .icon {
-			filter: invert(0) grayscale(100%);
-			-webkit-filter: invert(0) grayscale(100%);
+			filter: invert(0) grayscale(0);
+			-webkit-filter: invert(0) grayscale(0);
 		}
 		
 		.icon {
