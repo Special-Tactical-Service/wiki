@@ -74,9 +74,8 @@ html, body {
 	right: 0;
 	bottom: 0;
 	z-index: 1000;
-	background: repeating-linear-gradient(0deg, #252525 0px, #252525 1px, transparent 2px, transparent 5px);
+	background: repeating-linear-gradient(0deg, #252525 0px, #252525 1px, transparent 2px, transparent 4px);
 	background-size: 100% 4px;
-	animation: lines 2s linear infinite;
 	opacity: 0.2;
 	mix-blend-mode: color-burn;
 	pointer-events: none;
@@ -597,13 +596,3 @@ a {
 	color: var(--blue);
 	text-decoration: none;
 }
- 
-@keyframes lines {
-	0% {
-		background-position:0px 0px;
-	}
-
-	100% {
-	   background-position:0px 24px;
-	}
- }
