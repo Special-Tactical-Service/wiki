@@ -10,7 +10,10 @@
             </div>
         </template>
         <template>
-            <h1 class="article-title no-select">{{title}}</h1>
+            <div class="article-title no-select">
+                <h1>{{title}}</h1>
+                <a :href="'https://sts.emvi-integration.com/read/'+this.$route.params.id" class="button">{{$t("view_on_emvi")}}</a>
+            </div>
             <div class="article-info no-select">
                 {{views}} {{$t("views")}} -
                 {{$t("created")}}: {{published | moment("ll")}} -
@@ -86,7 +89,8 @@ export default {
         "title_toc": "Inhalt",
         "views": "Aufrufe",
         "created": "Erstellt",
-        "edited": "Zuletzt bearbeitet"
+        "edited": "Zuletzt bearbeitet",
+        "view_on_emvi": "Zu Emvi"
     }
 }
 </i18n>

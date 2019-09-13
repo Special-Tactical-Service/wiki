@@ -317,6 +317,28 @@ html, body {
 	color: var(--medium);
 }
 
+.article-title {
+	display: flex;
+	box-shadow: var(--border);
+
+	.button {
+		min-width: 200px;
+		font-size: 20px;
+		line-height: 64px;
+		font-weight: bold;
+		text-align: center;
+		white-space: nowrap;
+		color: var(--dark-to-light);
+		box-shadow: var(--border);
+		cursor: pointer;
+
+		&:hover {
+			color: var(--light-to-dark);
+			background: var(--dark-to-light);
+		}
+	}
+}
+
 .article-info {
 	font-size: 16px;
 	line-height: 24px;
