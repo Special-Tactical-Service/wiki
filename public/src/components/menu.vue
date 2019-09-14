@@ -7,7 +7,7 @@
 		<div class="search">
 			<div class="input">
 				<i class="material-icons no-select">search</i>
-				<input type="text" :placeholder="$t('placeholder_search')" v-model="searchquery" v-on:focus="focus" ref="queryfield" v-on:keyup="keyup" />
+				<input type="text" :placeholder="$t('placeholder_search')" v-model="searchquery" v-on:focus="focus" ref="queryfield" v-on:keydown="keydown" />
 				<div class="results" v-show="showResults && searchquery.length > 2 && results.length > 0" ref="results">
 					<searchresult v-for="(result, index) in results"
 						:key="result.id"
@@ -97,7 +97,7 @@ export default {
 			this.selected = 0;
 			this.showResults = true;
 		},
-		keyup(e) {
+		keydown(e) {
 			if(e.keyCode === 38) { // up
 				e.preventDefault();
 				this.selected--;
