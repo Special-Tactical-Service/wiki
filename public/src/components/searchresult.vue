@@ -23,15 +23,17 @@
 </template>
 
 <script>
+import slugify from "slugify";
+
 export default {
     props: ["result", "selected"],
     methods: {
         visit() {
             if(this.result.isArticle) {
-                this.$router.push(`/read/${this.result.id}`);
+                this.$router.push(`/read/${slugify(`${this.result.latest_article_content.title}-${this.result.id}`)}`);
             }
             else if(this.result.isList) {
-                this.$router.push(`/list/${this.result.id}`);
+                this.$router.push(`/list/${slugify(`${this.result.name.name}-${this.result.id}`)}`);
             }
             else {
                 this.$router.push(`/tag/${this.result.name}`);
