@@ -16,9 +16,16 @@ export default {
     components: {card},
     props: ["article", "pinned"],
     methods: {
-        visit() {
+        visit(e) {
             let slug = slugify(`${this.article.latest_article_content.title}-${this.article.id}`);
-            this.$router.push(`/read/${slug}`);
+            let url = `/read/${slug}`;
+
+            if(e.button === 0) {
+                this.$router.push(url);
+            }
+            else if(e.button === 1) {
+                window.open(url, "_blank");
+            }
         }
     }
 }

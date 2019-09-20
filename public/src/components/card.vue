@@ -3,7 +3,7 @@
         'card no-select': true,
         'card-blue': color === 'blue',
         'card-green': color === 'green'
-    }" v-on:click="$emit('click')">
+    }" v-on:mouseup="click">
         <div class="title" v-if="title">
             <i class="material-icons" v-if="pinned">flag</i>
             {{title}}
@@ -14,6 +14,11 @@
 
 <script>
 export default {
-    props: ["color", "title", "pinned"]
+    props: ["color", "title", "pinned"],
+    methods: {
+        click(e) {
+            this.$emit("click", e);
+        }
+    }
 }
 </script>

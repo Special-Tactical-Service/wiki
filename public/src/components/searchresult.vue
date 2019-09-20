@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:class="{result: true, selected}" v-on:click="visit">
+    <div v-bind:class="{result: true, selected}" v-on:mouseup="visit">
         <template v-if="result.isArticle">
             <strong class="color-blue">{{result.latest_article_content.title}}</strong>
             <div class="info">
@@ -28,18 +28,26 @@ import slugify from "slugify";
 export default {
     props: ["result", "selected"],
     methods: {
-        visit() {
+        visit(e) {
+            let url = "";
+
             if(this.result.isArticle) {
-                this.$router.push(`/read/${slugify(`${this.result.latest_article_content.title}-${this.result.id}`)}`);
+                url = `/read/${slugify(`${this.result.latest_article_content.title}-${this.result.id}`)}`;
             }
             else if(this.result.isList) {
-                this.$router.push(`/list/${slugify(`${this.result.name.name}-${this.result.id}`)}`);
+                url = `/list/${slugify(`${this.result.name.name}-${this.result.id}`)}`;
             }
             else {
-                this.$router.push(`/tag/${this.result.name}`);
+                url = `/tag/${this.result.name}`;
             }
 
-            this.$emit("close");
+            if(e.button === 0) {
+                this.$router.push(url);
+                this.$emit("close");
+            }
+            else {
+                window.open(url, "_blank");
+            }
         }
     }
 }
