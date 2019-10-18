@@ -36,14 +36,12 @@ export default {
             this.articlesOffset = 0;
             this.articles = [];
             this.loadTag(value);
-            this.loadArticles(value);
         }
     },
     mounted() {
         let name = this.$route.params.name;
         this.loadTag(name);
         this.loadTags();
-        this.loadArticles(name);
     },
     methods: {
         loadTags() {
@@ -61,16 +59,17 @@ export default {
             this.emvi.getTag(name)
             .then(tag => {
                 this.tag = tag;
+                this.loadArticles(tag.id);
             });
         },
-        loadArticles(name) {
-            this.emvi.findArticles(null, {tags: name, offset: this.articlesOffset, sort_title: "asc"})
+        loadArticles(id) {
+            this.emvi.findArticles(null, {tag_ids: id, offset: this.articlesOffset, sort_title: "asc"})
             .then(results => {
                 this.articles = this.articles.concat(results.articles);
                 this.articlesOffset = results.articles.length;
 
                 if(results.articles.length > 0) {
-                    this.loadArticles(name);
+                    this.loadArticles(id);
                 }
             });
         }
