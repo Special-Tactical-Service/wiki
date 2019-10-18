@@ -31,7 +31,10 @@
 import layout from "../components/layout.vue";
 import tag from "../components/tag.vue";
 import {buildTableOfContents} from "../util/toc.js";
+import {addDirectLinks} from "../util/directlink.js";
 import {idFromSlug} from "../util/slug.js";
+
+const scrollDistance = 120;
 
 export default {
     components: {layout, tag},
@@ -65,8 +68,9 @@ export default {
                 this.published = result.article.published;
                 this.updated = result.article.mod_time;
                 this.tags = result.article.tags;
-                this.content = result.content.content;
+                this.content = addDirectLinks(result.content.content);
                 this.buildToc();
+                this.scrollToAnchor();
             });
         },
         buildToc() {
@@ -76,8 +80,33 @@ export default {
         },
         scrollTo(title) {
             let element = this.$refs.content.getElementsByTagName(title.tag)[title.number-1];
-            let top = element.getBoundingClientRect().top+window.scrollY-140;
+            let top = element.getBoundingClientRect().top+window.scrollY-scrollDistance;
             window.scrollTo({top, behavior: "smooth"});
+        },
+        scrollToAnchor() {
+            if(this.$route.hash) {
+                setTimeout(() => {
+                    let anchor = this.$route.hash.replace("%20", " ").substr(1).toLowerCase();
+                    let headlinesH2 = this.$refs.content.getElementsByTagName("h2");
+                    let headlinesH3 = this.$refs.content.getElementsByTagName("h3");
+
+                    for(let node of headlinesH2) {
+                        if(node.innerText.toLowerCase() === anchor) {
+                            let top = node.getBoundingClientRect().top+window.scrollY-scrollDistance;
+                            window.scrollTo({top, behavior: "smooth"});
+                            return;
+                        }
+                    }
+
+                    for(let node of headlinesH3) {
+                        if(node.innerText.toLowerCase() === anchor) {
+                            let top = node.getBoundingClientRect().top+window.scrollY-scrollDistance;
+                            window.scrollTo({top, behavior: "smooth"});
+                            return;
+                        }
+                    }
+                }, 500);
+            }
         }
     }
 }
