@@ -12,7 +12,7 @@
         <template>
             <div class="article-title no-select">
                 <h1>{{title}}</h1>
-                <a :href="'https://sts.emvi-integration.com/read/'+this.$route.params.id" class="button">{{$t("view_on_emvi")}}</a>
+                <a :href="'https://sts.emvi-integration.com/read/'+this.$route.params.id" class="button" target="_blank">{{$t("view_on_emvi")}}</a>
             </div>
             <div class="article-info no-select">
                 {{views}} {{$t("views")}} -
