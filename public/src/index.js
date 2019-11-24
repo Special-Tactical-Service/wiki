@@ -41,14 +41,10 @@ const i18n = new VueI18n({
 });
 
 // Emvi API
-let clientId = "uh1wUT3E3Mm2fClaz9gS";
-let clientSecret = "W436DpuLjByH5HFEMbdo2oLm52WOnZEVHSF2VsVJo7PLdIvuRtauIQ1NIHeytRDu";
+let clientId = "VDVCTHBt5AcM4rRLUJR5";
+let clientSecret = "KltFFSoXaZX7wysxIGdzvxW2KpArfar7G9EAzattw3CUgp1Y7UBkRQlnpCGKTwC0";
 let organization = "sts";
-let emviOptions = {
-	auth_host: "https://auth.emvi-integration.com", // TODO switch to production
-	api_host: "https://api.emvi-integration.com"
-};
-let emvi = new EmviClient(clientId, clientSecret, organization, emviOptions);
+let emvi = new EmviClient(clientId, clientSecret, organization);
 
 Vue.mixin({
 	data() {
