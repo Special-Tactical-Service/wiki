@@ -1,11 +1,11 @@
 FROM golang AS build
 ADD . /go/src/github.com/special-tactical-service/wiki
 WORKDIR /go/src/github.com/special-tactical-service/wiki
-RUN apt update && \
-	apt upgrade -y && \
-	apt install curl -y
-RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh && bash nodesource_setup.sh
-RUN apt-get install -y nodejs
+RUN apt-get update && \
+	apt-get upgrade -y && \
+	apt-get install -y curl && \
+	curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh && bash nodesource_setup.sh && \
+	apt-get install -y nodejs
 
 # build backend
 ENV GOPATH=/go
