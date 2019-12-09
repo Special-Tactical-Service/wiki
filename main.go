@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"github.com/sirupsen/logrus"
@@ -65,7 +66,11 @@ func loadBuildJs() {
 		logrus.WithField("err", err).Fatal("build.js not found")
 	}
 
-	buildJs = content
+	buildJs = make([]byte, 0)
+	buildJs = append(buildJs, []byte(fmt.Sprintf("var STS_WIKI_CLIENT_ID='%s';", os.Getenv("STS_WIKI_CLIENT_ID")))...)
+	buildJs = append(buildJs, []byte(fmt.Sprintf("var STS_WIKI_CLIENT_SECRET='%s';", os.Getenv("STS_WIKI_CLIENT_SECRET")))...)
+	buildJs = append(buildJs, []byte(fmt.Sprintf("var STS_WIKI_ORGANIZATION='%s';", os.Getenv("STS_WIKI_ORGANIZATION")))...)
+	buildJs = append(buildJs, content...)
 }
 
 func setupRouter() *mux.Router {

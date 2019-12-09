@@ -41,10 +41,7 @@ const i18n = new VueI18n({
 });
 
 // Emvi API
-let clientId = "VDVCTHBt5AcM4rRLUJR5";
-let clientSecret = "KltFFSoXaZX7wysxIGdzvxW2KpArfar7G9EAzattw3CUgp1Y7UBkRQlnpCGKTwC0";
-let organization = "sts";
-let emvi = new EmviClient(clientId, clientSecret, organization);
+let emvi = new EmviClient(STS_WIKI_CLIENT_ID, STS_WIKI_CLIENT_SECRET, STS_WIKI_ORGANIZATION);
 
 Vue.mixin({
 	data() {

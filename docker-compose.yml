@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  stswiki:
+    image: kugel/stswiki
+    container_name: stswiki
+    environment:
+      - STS_WIKI_CLIENT_ID=
+      - STS_WIKI_CLIENT_SECRET=
+      - STS_WIKI_ORGANIZATION=
+    ports:
+      - 80:8080
+    networks:
+     - stswiki-net
+networks:
+  stswiki-net:
+    driver: "bridge"
