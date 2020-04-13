@@ -7,6 +7,7 @@ import moment from "moment";
 import EmviClient from "@emvi/api";
 import {getRouter} from "./router";
 import {getI18n} from "./i18n";
+import {SearchStore} from "./store/search";
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -24,8 +25,15 @@ Vue.mixin({
 	}
 });
 
+let store = new Vuex.Store({
+	modules: {
+		search: SearchStore
+	}
+});
+
 new Vue({
 	el: "#app",
+	store,
 	router: getRouter(),
 	i18n: getI18n(),
 	mounted() {
