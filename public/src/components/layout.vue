@@ -2,9 +2,16 @@
     <div>
         <sts-menu></sts-menu>
         <div class="content">
-            <slot></slot>
-            <sts-footer></sts-footer>
+            <div class="content-main">
+                <div class="content-main-left">
+                    <slot name="left"></slot>
+                </div>
+                <div class="content-main-right">
+                    <slot></slot>
+                </div>
+            </div>
         </div>
+        <sts-footer></sts-footer>
     </div>
 </template>
 
