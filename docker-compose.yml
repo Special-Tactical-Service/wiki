@@ -1,17 +1,16 @@
-version: '2'
+version: '3'
 
 services:
   stswiki:
     image: kugel/stswiki
     container_name: stswiki
+    restart: always
     environment:
-      - STS_WIKI_CLIENT_ID=
-      - STS_WIKI_CLIENT_SECRET=
-      - STS_WIKI_ORGANIZATION=
+      - STS_WIKI_TLS=true
+      - STS_WIKI_TLS_EMAIL=info@sts.wtf
+      - STS_WIKI_HOST=wiki.sts.wtf
+      - STS_WIKI_CLIENT_ID=VDVCTHBt5AcM4rRLUJR5
+      - STS_WIKI_CLIENT_SECRET=KltFFSoXaZX7wysxIGdzvxW2KpArfar7G9EAzattw3CUgp1Y7UBkRQlnpCGKTwC0
+      - STS_WIKI_ORGANIZATION=sts
     ports:
       - 80:8080
-    networks:
-     - stswiki-net
-networks:
-  stswiki-net:
-    driver: "bridge"

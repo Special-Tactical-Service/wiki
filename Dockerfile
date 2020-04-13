@@ -14,14 +14,25 @@ RUN go build -ldflags "-s -w" main.go
 # build frontend
 RUN cd /go/src/github.com/special-tactical-service/wiki/public && npm i && npm rebuild node-sass && npm run build
 
-FROM ubuntu
+FROM alpine
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache && \
+    apk add ca-certificates && \
+    rm -rf /var/cache/apk/*
 COPY --from=build /go/src/github.com/special-tactical-service/wiki /app
 WORKDIR /app
 
+# use root to bind port 80 and 443
+RUN addgroup -S appuser && \
+    adduser -S -G appuser appuser && \
+    chown -R appuser:appuser /app
+USER appuser
+
 # default config
 ENV STS_WIKI_LOGLEVEL=info
-ENV STS_WIKI_WATCH_BUILD_JS=false
 ENV STS_WIKI_ALLOWED_ORIGINS=*
 ENV STS_WIKI_HOST=0.0.0.0:8080
 
+EXPOSE 8080
 CMD ["/app/main"]

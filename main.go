@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/caddyserver/certmagic"
+	"github.com/emvi/logbuch"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
 	"os"
-	"strconv"
 	"strings"
-	"time"
 )
 
 const (
@@ -22,12 +21,8 @@ const (
 	cssFilePrefix   = "/dist/main.css"
 	indexFile       = "public/index.html"
 	rootDirPrefix   = "/"
-
-	envPrefix = "STS_WIKI_"
-	pwdString = "PASSWORD" // do not log passwords!
-
-	defaultHttpWriteTimeout = 20
-	defaultHttpReadTimeout  = 20
+	logTimeFormat   = "2006-01-02_15:04:05"
+	envPrefix       = "STS_WIKI_"
 )
 
 var (
@@ -36,34 +31,35 @@ var (
 )
 
 func configureLog() {
-	logrus.Info("Configure logging...")
+	logbuch.SetFormatter(logbuch.NewFieldFormatter(logTimeFormat, "\t\t"))
+	logbuch.Info("Configure logging...")
 	level := strings.ToLower(os.Getenv("STS_WIKI_LOGLEVEL"))
 
 	if level == "debug" {
-		logrus.SetLevel(logrus.DebugLevel)
+		logbuch.SetLevel(logbuch.LevelDebug)
 	} else if level == "info" {
-		logrus.SetLevel(logrus.InfoLevel)
+		logbuch.SetLevel(logbuch.LevelInfo)
 	} else {
-		logrus.SetLevel(logrus.WarnLevel)
+		logbuch.SetLevel(logbuch.LevelWarning)
 	}
 }
 
 func logEnvConfig() {
 	for _, e := range os.Environ() {
-		if strings.HasPrefix(e, envPrefix) && !strings.Contains(e, pwdString) {
+		if strings.HasPrefix(e, envPrefix) {
 			pair := strings.Split(e, "=")
-			logrus.Info(pair[0] + "=" + pair[1])
+			logbuch.Info(pair[0] + "=" + pair[1])
 		}
 	}
 }
 
 func loadBuildJs() {
-	logrus.Info("Loading build.js...")
+	logbuch.Info("Loading build.js...")
 	watchBuildJs = os.Getenv("STS_WIKI_WATCH_BUILD_JS") != ""
 	content, err := ioutil.ReadFile(buildJsFile)
 
 	if err != nil {
-		logrus.WithField("err", err).Fatal("build.js not found")
+		logbuch.Fatal("build.js not found", logbuch.Fields{"err": err})
 	}
 
 	buildJs = make([]byte, 0)
@@ -101,7 +97,7 @@ func setupRouter() *mux.Router {
 }
 
 func configureCors(router *mux.Router) http.Handler {
-	logrus.Info("Configuring CORS...")
+	logbuch.Info("Configuring CORS...")
 
 	origins := strings.Split(os.Getenv("STS_WIKI_ALLOWED_ORIGINS"), ",")
 	c := cors.New(cors.Options{
@@ -115,42 +111,21 @@ func configureCors(router *mux.Router) http.Handler {
 }
 
 func start(handler http.Handler) {
-	logrus.Info("Starting server...")
+	logbuch.Info("Starting server...")
 
-	writeTimeout := defaultHttpWriteTimeout
-	readTimeout := defaultHttpReadTimeout
-	var err error
+	if strings.ToLower(os.Getenv("STS_WIKI_TLS")) == "true" {
+		logbuch.Info("TLS enabled")
+		certmagic.DefaultACME.Agreed = true
+		certmagic.DefaultACME.Email = os.Getenv("STS_WIKI_TLS_EMAIL")
+		certmagic.DefaultACME.CA = certmagic.LetsEncryptProductionCA
 
-	if os.Getenv("STS_WIKI_HTTP_WRITE_TIMEOUT") != "" {
-		writeTimeout, err = strconv.Atoi(os.Getenv("STS_WIKI_HTTP_WRITE_TIMEOUT"))
-
-		if err != nil {
-			logrus.Fatal(err)
+		if err := certmagic.HTTPS([]string{os.Getenv("STS_WIKI_HOST")}, handler); err != nil {
+			logbuch.Fatal("Error starting server", logbuch.Fields{"err": err})
 		}
-	}
-
-	if os.Getenv("STS_WIKI_HTTP_READ_TIMEOUT") != "" {
-		readTimeout, err = strconv.Atoi(os.Getenv("STS_WIKI_HTTP_READ_TIMEOUT"))
-
-		if err != nil {
-			logrus.Fatal(err)
-		}
-	}
-
-	logrus.WithFields(logrus.Fields{"write_timeout": writeTimeout, "read_timeout": readTimeout}).Info("Using HTTP read/write timeouts")
-
-	server := &http.Server{
-		Handler:      handler,
-		Addr:         os.Getenv("STS_WIKI_HOST"),
-		WriteTimeout: time.Duration(writeTimeout) * time.Second,
-		ReadTimeout:  time.Duration(readTimeout) * time.Second,
-	}
-
-	if strings.ToLower(os.Getenv("STS_WIKI_TLS_ENABLE")) == "true" {
-		logrus.Info("TLS enabled")
-		logrus.Fatal(server.ListenAndServeTLS(os.Getenv("STS_WIKI_TLS_CERT"), os.Getenv("STS_WIKI_TLS_PKEY")))
 	} else {
-		logrus.Fatal(server.ListenAndServe())
+		if err := http.ListenAndServe(os.Getenv("STS_WIKI_HOST"), handler); err != nil {
+			logbuch.Fatal("Error starting server", logbuch.Fields{"err": err})
+		}
 	}
 }
 
