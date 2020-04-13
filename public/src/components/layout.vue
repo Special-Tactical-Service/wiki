@@ -1,38 +1,18 @@
 <template>
     <div>
-        <mainmenu></mainmenu>
-        <div v-bind:class="{main: true, centered}">
-            <div class="content-left no-select">
-                <slot name="left"></slot>
-                <div class="end">
-                    <span>&copy; 2019 Special Tactical Service</span>
-                    <a href="https://sts.wtf/index.php?datenschutzerklaerung/" target="_blank">{{$t("link_imprint")}}</a>
-                    <a href="https://sts.wtf/index.php?datenschutzerklaerung/" target="_blank">{{$t("link_privacy")}}</a>
-                    <a href="https://emvi.com/" target="_blank">{{$t("link_powered_by")}}</a>
-                </div>
-            </div>
-            <div class="content">
-                <slot></slot>
-            </div>
+        <sts-menu></sts-menu>
+        <div class="content">
+            <slot></slot>
+            <sts-footer></sts-footer>
         </div>
     </div>
 </template>
 
 <script>
-import mainmenu from "../components/menu.vue";
+    import stsMenu from "./menu.vue";
+    import stsFooter from "./footer.vue";
 
-export default {
-    components: {mainmenu},
-    props: ["centered"]
-}
-</script>
-
-<i18n>
-{
-    "de": {
-        "link_imprint": "Impressum",
-        "link_privacy": "Datenschutzerklärung",
-        "link_powered_by": "powered by Emvi"
+    export default {
+        components: {stsMenu, stsFooter}
     }
-}
-</i18n>
+</script>

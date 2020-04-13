@@ -2,12 +2,12 @@ import * as pages from "./pages";
 import VueRouter from "vue-router";
 
 const routes = [
-    {path: "/", component: pages.Home},
-    {path: "/lists", component: pages.Lists},
-    {path: "/read/:id", component: pages.Read},
-    {path: "/list/:id", component: pages.List},
-    {path: "/tag/:name", component: pages.Tag},
-    {path: "*", component: pages.Error404}
+    {path: "/", component: pages.Start},
+    //{path: "/lists", component: pages.Lists},
+    //{path: "/read/:id", component: pages.Read},
+    //{path: "/list/:id", component: pages.List},
+    //{path: "/tag/:name", component: pages.Tag},
+    {path: "*", component: pages.NotFound}
 ];
 
 export function getRouter() {
