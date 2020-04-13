@@ -119,7 +119,7 @@ func start(handler http.Handler) {
 		certmagic.DefaultACME.Email = os.Getenv("STS_WIKI_TLS_EMAIL")
 		certmagic.DefaultACME.CA = certmagic.LetsEncryptProductionCA
 
-		if err := certmagic.HTTPS([]string{os.Getenv("STS_WIKI_HOST")}, handler); err != nil {
+		if err := certmagic.HTTPS(strings.Split(os.Getenv("STS_WIKI_DOMAIN"), ","), handler); err != nil {
 			logbuch.Fatal("Error starting server", logbuch.Fields{"err": err})
 		}
 	} else {
