@@ -195,6 +195,12 @@ html, body {
   color: $orange;
 }
 
+h1 {
+  margin: 16px 0;
+  font-size: 32px;
+  line-height: 1;
+}
+
 .article {
   background: #fff;
   padding: 20px;
@@ -341,7 +347,7 @@ html, body {
 .toc {
   position: fixed;
   max-width: 240px;
-  padding: 64px 0 0 0;
+  padding: 16px 0 0 0;
 
   .headline {
     font-size: 18px;
@@ -412,6 +418,10 @@ html, body {
 
   &-info {
     color: $grey;
+  }
+
+  &:hover {
+    background: $light_grey;
   }
 }
 
