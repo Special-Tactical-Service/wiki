@@ -77,6 +77,9 @@
                     this.content = addDirectLinks(result.content.content);
                     this.buildToc();
                     this.scrollToAnchor();
+                })
+                .catch(() => {
+                    this.$router.push("/notfound");
                 });
             },
             buildToc() {
