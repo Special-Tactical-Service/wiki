@@ -18,30 +18,8 @@
 
     export default {
         components: {stsLayout, stsTag, stsListCard},
-        data() {
-            return {
-                offset: 0,
-                lists: []
-            };
-        },
         computed: {
-            ...mapGetters(["tags"])
-        },
-        mounted() {
-            this.loadLists();
-        },
-        methods: {
-            loadLists() {
-                this.emvi.findLists(null, {offset: this.offset, sort_name: "asc"})
-                    .then(results => {
-                        this.lists = this.lists.concat(results.lists);
-                        this.offset += results.lists.length;
-
-                        if(results.lists.length > 0) {
-                            this.loadLists();
-                        }
-                    });
-            }
+            ...mapGetters(["tags", "lists"])
         }
     }
 </script>
