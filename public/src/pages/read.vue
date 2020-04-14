@@ -1,42 +1,45 @@
 <template>
     <sts-layout>
-        <div class="toc" slot="left">
-            <h2>{{$t("title_toc")}}</h2>
-            <div class="toc-l1" v-for="title in toc" :key="title.id">
-                <div class="title" v-on:click="scrollTo(title)">{{title.text}}</div>
-                <div class="toc-l2" v-for="child in title.children" :key="child.id">
-                    <div class="title" v-on:click="scrollTo(child)">{{child.text}}</div>
-                </div>
-            </div>
-        </div>
-        <template>
-            <div class="article-title no-select">
+        <div class="article">
+            <div class="article-title">
                 <h1>{{title}}</h1>
-                <!--<a :href="'https://sts.emvi.com/read/'+this.$route.params.id" class="button" target="_blank">{{$t("view_on_emvi")}}</a>-->
+                <a :href="'https://sts.emvi.com/read/'+this.$route.params.id" class="button" target="_blank">{{$t("view_on_emvi")}}</a>
             </div>
-            <div class="article-info no-select">
+            <div class="article-info">
                 {{views}} {{$t("views")}} -
                 {{$t("created")}}: {{published | moment("ll")}} -
                 {{$t("edited")}}: {{updated | moment("ll")}}
             </div>
-            <div class="article-tags no-select">
-                <!--<tag v-for="tag in tags" :key="tag.id" :tag="tag"></tag>-->
+            <div class="article-tags">
+                <sts-tag v-for="tag in tags" :key="tag.id" :tag="tag"></sts-tag>
             </div>
             <div class="article-content" v-html="content" ref="content"></div>
-        </template>
+        </div>
+        <div class="toc" slot="right">
+            <div class="headline">{{$t("title_toc")}}</div>
+            <div class="toc-l1" v-for="title in toc" :key="title.id">
+                <div class="title" v-on:click="scrollTo(title)">{{title.text}}</div>
+                <div class="toc-l2" v-for="child in title.children" :key="child.id">
+                    <div class="title" v-on:click="scrollTo(child)">{{child.text}}</div>
+                    <div class="toc-l3" v-for="c in child.children" :key="c.id">
+                        <div class="title" v-on:click="scrollTo(c)">{{c.text}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </sts-layout>
 </template>
 
 <script>
-    import {stsLayout} from "../components";
     import {buildTableOfContents} from "../util/toc.js";
     import {addDirectLinks} from "../util/directlink.js";
     import {idFromSlug} from "../util/slug.js";
+    import {stsLayout, stsTag} from "../components";
 
-    const scrollDistance = 120;
+    const scrollDistance = 60;
 
     export default {
-        components: {stsLayout},
+        components: {stsLayout, stsTag},
         data() {
             return {
                 title: "",
@@ -118,7 +121,7 @@
             "views": "Aufrufe",
             "created": "Erstellt",
             "edited": "Zuletzt bearbeitet",
-            "view_on_emvi": "Zu Emvi"
+            "view_on_emvi": "Diesen Artikel auf Emvi bearbeiten"
         }
     }
 </i18n>

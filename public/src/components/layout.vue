@@ -3,11 +3,11 @@
         <sts-menu></sts-menu>
         <div class="content">
             <div class="content-main">
-                <div class="content-main-left">
-                    <slot name="left"></slot>
+                <div>
+                    <slot></slot>
                 </div>
                 <div class="content-main-right">
-                    <slot></slot>
+                    <slot name="right"></slot>
                 </div>
             </div>
         </div>
