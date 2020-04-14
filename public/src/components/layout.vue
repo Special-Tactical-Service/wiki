@@ -3,7 +3,7 @@
         <sts-menu></sts-menu>
         <div class="content">
             <div class="content-main">
-                <div>
+                <div class="content-main-left">
                     <slot></slot>
                 </div>
                 <div class="content-main-right">

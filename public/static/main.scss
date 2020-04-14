@@ -148,9 +148,14 @@ html, body {
   &-main {
     display: flex;
 
+    &-left {
+      flex-grow: 1;
+    }
+
     &-right {
+      flex-shrink: 0;
       margin: 0 0 0 40px;
-      min-width: $search_width;
+      width: $search_width;
     }
   }
 }
@@ -194,6 +199,7 @@ html, body {
   background: #fff;
   padding: 20px;
   border-radius: 1px;
+  margin: 0 0 20px 0;
 
   .article-title {
     display: flex;
@@ -221,6 +227,7 @@ html, body {
   }
 
   .article-tags {
+    display: flex;
     margin: 16px 0;
   }
 
@@ -374,6 +381,7 @@ html, body {
 }
 
 .tag {
+  display: block;
   padding: 4px 8px;
   margin: 4px;
   border-radius: 1px;
@@ -382,4 +390,35 @@ html, body {
   user-select: none;
   cursor: pointer;
   text-decoration: none;
+  line-height: 1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #fff;
+  padding: 10px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-width: 0 0 0 2px;
+  border-style: solid;
+
+  &-title {
+    font-weight: 700;
+  }
+
+  &-info {
+    color: $grey;
+  }
+}
+
+.card-blue {
+  border-color: $blue;
+}
+
+.card-green {
+  border-color: $green;
 }

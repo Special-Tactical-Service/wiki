@@ -8,6 +8,7 @@ import EmviClient from "@emvi/api";
 import {getRouter} from "./router";
 import {getI18n} from "./i18n";
 import {SearchStore} from "./store/search";
+import {TagStore} from "./store/tags";
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -27,7 +28,8 @@ Vue.mixin({
 
 let store = new Vuex.Store({
 	modules: {
-		search: SearchStore
+		search: SearchStore,
+		tags: TagStore
 	}
 });
 
@@ -38,5 +40,6 @@ new Vue({
 	i18n: getI18n(),
 	mounted() {
 		moment.locale("de");
+		this.$store.dispatch("loadTags", emvi);
 	}
 });
