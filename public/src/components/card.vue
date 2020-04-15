@@ -1,24 +1,30 @@
 <template>
-    <div v-bind:class="{
-        'card no-select': true,
-        'card-blue': color === 'blue',
-        'card-green': color === 'green'
-    }" v-on:mouseup="click">
-        <div class="title" v-if="title">
-            <i class="material-icons" v-if="pinned">flag</i>
+    <div :class="cardClass" v-on:click="click">
+        <div class="card-title">
             {{title}}
         </div>
-        <slot></slot>
+        <div class="card-info">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
 <script>
-export default {
-    props: ["color", "title", "pinned"],
-    methods: {
-        click(e) {
-            this.$emit("click", e);
+    export default {
+        props: ["color", "title"],
+        computed: {
+            cardClass() {
+                return {
+                    card: true,
+                    "card-blue": this.color === "blue",
+                    "card-green": this.color === "green"
+                };
+            }
+        },
+        methods: {
+            click(e) {
+                this.$emit("click", e);
+            }
         }
     }
-}
 </script>

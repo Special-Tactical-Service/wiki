@@ -1,41 +1,39 @@
 <template>
-    <card color="green" :title="list.name.name" v-on:click="visit" :pinned="pinned">
-        <div class="info">
-            {{list.name.info}} -
-            {{$t("created")}}: {{list.def_time | moment("ll")}} -
-            {{$t("edited")}}: {{list.mod_time | moment("ll")}}
-        </div>
-    </card>
+    <sts-card color="green" :title="list.name.name" v-on:click="visit">
+        {{list.name.info}} -
+        {{$t("created")}}: {{list.def_time | moment("ll")}} -
+        {{$t("edited")}}: {{list.mod_time | moment("ll")}}
+    </sts-card>
 </template>
 
 <script>
-import slugify from "slugify";
-import card from "./card.vue";
+    import stsCard from "./card.vue";
+    import slugify from "slugify";
 
-export default {
-    components: {card},
-    props: ["list", "pinned"],
-    methods: {
-        visit(e) {
-            let slug = slugify(`${this.list.name.name}-${this.list.id}`);
-            let url = `/list/${slug}`;
+    export default {
+        components: {stsCard},
+        props: ["list"],
+        methods: {
+            visit(e) {
+                let slug = slugify(`${this.list.name.name}-${this.list.id}`);
+                let url = `/list/${slug}`;
 
-            if(e.button === 0) {
-                this.$router.push(url);
-            }
-            else if(e.button === 1) {
-                window.open(url, "_blank");
+                if(e.button === 0) {
+                    this.$router.push(url);
+                }
+                else if(e.button === 1) {
+                    window.open(url, "_blank");
+                }
             }
         }
     }
-}
 </script>
 
 <i18n>
-{
-    "de": {
-        "created": "Erstellt",
-        "edited": "Zuletzt bearbeitet"
+    {
+        "de": {
+            "created": "Erstellt",
+            "edited": "Zuletzt bearbeitet"
+        }
     }
-}
 </i18n>

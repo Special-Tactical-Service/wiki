@@ -2,7 +2,7 @@
     <sts-layout>
         <template>
             <h1>{{$t("title")}}</h1>
-            <sts-list-card v-for="list in lists" :key="list.id" :list="list"></sts-list-card>
+            <sts-article-card v-for="article in articles" :key="article.id" :article="article"></sts-article-card>
         </template>
         <template slot="right">
             <div class="tags">
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-    import {stsListCard, stsLayout, stsTag} from "../components";
     import {mapGetters} from "vuex";
+    import {stsLayout, stsTag, stsArticleCard} from "../components";
 
     export default {
-        components: {stsLayout, stsTag, stsListCard},
+        components: {stsLayout, stsTag, stsArticleCard},
         computed: {
-            ...mapGetters(["tags", "lists"])
+            ...mapGetters(["tags", "articles"])
         }
     }
 </script>
@@ -27,7 +27,7 @@
 <i18n>
     {
         "de": {
-            "title": "Listen"
+            "title": "Artikel"
         }
     }
 </i18n>

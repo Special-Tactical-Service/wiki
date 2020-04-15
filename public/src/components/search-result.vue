@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:class="{result: true, selected}" v-on:mouseup="visit">
+    <div v-bind:class="{result: true, active}" v-on:mouseup="open">
         <template v-if="result.isArticle">
             <strong class="color-blue">{{result.latest_article_content.title}}</strong>
             <div class="info">
@@ -23,42 +23,22 @@
 </template>
 
 <script>
-import slugify from "slugify";
-
-export default {
-    props: ["result", "selected"],
-    methods: {
-        visit(e) {
-            let url = "";
-
-            if(this.result.isArticle) {
-                url = `/read/${slugify(`${this.result.latest_article_content.title}-${this.result.id}`)}`;
-            }
-            else if(this.result.isList) {
-                url = `/list/${slugify(`${this.result.name.name}-${this.result.id}`)}`;
-            }
-            else {
-                url = `/tag/${this.result.name}`;
-            }
-
-            if(e.button === 0) {
-                this.$router.push(url);
-                this.$emit("close");
-            }
-            else {
-                window.open(url, "_blank");
+    export default {
+        props: ["result", "active"],
+        methods: {
+            open(e) {
+                this.$emit('open', {e, result: this.result});
             }
         }
     }
-}
 </script>
 
 <i18n>
-{
-    "de": {
-        "views": "Aufrufe",
-        "created": "Erstellt",
-        "edited": "Zuletzt bearbeitet"
+    {
+        "de": {
+            "views": "Aufrufe",
+            "created": "Erstellt",
+            "edited": "Zuletzt bearbeitet"
+        }
     }
-}
 </i18n>

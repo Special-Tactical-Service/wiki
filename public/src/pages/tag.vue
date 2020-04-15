@@ -1,86 +1,62 @@
 <template>
-    <layout>
-        <template slot="left">
-			<h2>{{$t("title_tags")}}</h2>
-			<tag v-for="tag in tags" :key="tag.id" :tag="tag"></tag>
-		</template>
+    <sts-layout>
         <template>
             <h1>{{tag.name}}</h1>
-            <articlecard v-for="article in articles" :key="article.id" :article="article"></articlecard>
+            <sts-article-card v-for="article in articles" :key="article.id" :article="article"></sts-article-card>
         </template>
-    </layout>
+        <template slot="right">
+            <div class="tags">
+                <sts-tag v-for="tag in tags" :key="tag.id" :tag="tag"></sts-tag>
+            </div>
+        </template>
+    </sts-layout>
 </template>
 
 <script>
-import layout from "../components/layout.vue";
-import articlecard from "../components/article-card.vue";
-import tag from "../components/tag.vue";
+    import {mapGetters} from "vuex";
+    import {stsLayout, stsTag, stsArticleCard} from "../components";
 
-export default {
-    components: {
-        layout,
-        articlecard,
-        tag
-    },
-    data() {
-        return {
-            tag: {},
-            tagsOffset: 0,
-            tags: [],
-            articlesOffset: 0,
-            articles: []
-        };
-    },
-    watch: {
-        "$route.params.name": function(value) {
-            this.articlesOffset = 0;
-            this.articles = [];
-            this.loadTag(value);
-        }
-    },
-    mounted() {
-        let name = this.$route.params.name;
-        this.loadTag(name);
-        this.loadTags();
-    },
-    methods: {
-        loadTags() {
-			this.emvi.findTags(null, {offset: this.tagsOffset})
-			.then(results => {
-				this.tags = this.tags.concat(results.tags);
-				this.tagsOffset += results.tags.length;
-
-				if(results.tags.length > 0) {
-					this.loadTags();
-				}
-			});
-		},
-        loadTag(name) {
-            this.emvi.getTag(name)
-            .then(tag => {
-                this.tag = tag;
-                this.loadArticles(tag.id);
-            });
+    export default {
+        components: {stsLayout, stsTag, stsArticleCard},
+        data() {
+            return {
+                tag: {},
+                articlesOffset: 0,
+                articles: []
+            };
         },
-        loadArticles(id) {
-            this.emvi.findArticles(null, {tag_ids: id, offset: this.articlesOffset, sort_title: "asc"})
-            .then(results => {
-                this.articles = this.articles.concat(results.articles);
-                this.articlesOffset = results.articles.length;
+        computed: {
+            ...mapGetters(["tags"])
+        },
+        watch: {
+            "$route.params.name": function(value) {
+                this.articlesOffset = 0;
+                this.articles = [];
+                this.loadTag(value);
+            }
+        },
+        mounted() {
+            this.loadTag(this.$route.params.name);
+        },
+        methods: {
+            loadTag(name) {
+                this.emvi.getTag(name)
+                    .then(tag => {
+                        this.tag = tag;
+                        this.loadArticles(tag.id);
+                    });
+            },
+            loadArticles(id) {
+                this.emvi.findArticles(null, {tag_ids: id, offset: this.articlesOffset, sort_title: "asc"})
+                    .then(results => {
+                        this.articles = this.articles.concat(results.articles);
+                        this.articlesOffset = results.articles.length;
 
-                if(results.articles.length > 0) {
-                    this.loadArticles(id);
-                }
-            });
+                        if(results.articles.length > 0) {
+                            this.loadArticles(id);
+                        }
+                    });
+            }
         }
     }
-}
 </script>
-
-<i18n>
-{
-	"de": {
-		"title_tags": "Tags"
-	}
-}
-</i18n>
