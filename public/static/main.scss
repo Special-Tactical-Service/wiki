@@ -11,10 +11,15 @@ $sts_blue_dark: rgba(36, 66, 95, 1);
 $sts_light_grey: rgba(250, 250, 250, 1);
 $sts_dark_grey: rgba(45, 45, 45, 1);
 $blue: #0066cc;
+$blue-5: rgba(0, 102, 204, 0.05);
 $green: #12b94a;
+$green-5: rgba(18, 185, 74, 0.05);
 $orange: #ff7e00;
+$orange-5: rgba(255, 126, 0, 0.05);
 $grey: #868686;
 $light_grey: rgb(240, 240, 240);
+$red: #ff0000;
+$red-5: rgba(256, 0, 0, 0.05);
 
 * {
   box-sizing: border-box;
@@ -340,6 +345,37 @@ h1 {
 
       & > p {
         padding: 0 16px;
+      }
+    }
+
+    .infobox {
+      padding: 4px 16px;
+      border-width: 0 0 0 2px;
+      border-style: solid;
+      border-radius: 1px;
+
+      & > p {
+        margin: 8px 0;
+      }
+
+      &--red {
+        border-color: $red;
+        background: $red-5;
+      }
+
+      &--green {
+        border-color: $green;
+        background: $green-5;
+      }
+
+      &--blue {
+        border-color: $blue;
+        background: $blue-5;
+      }
+
+      &-orange {
+        border-color: $orange;
+        background: $orange-5;
       }
     }
   }
