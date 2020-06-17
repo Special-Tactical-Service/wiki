@@ -18,7 +18,7 @@ export function buildTableOfContents(dom, data) {
         }
 
         let tag = node.tagName.toUpperCase();
-        let text = node.innerText || "-";
+        let text = node.innerText.substr(0, node.innerText.length-2) || "-";
 
         if(tag === "H2") {
             id++;
