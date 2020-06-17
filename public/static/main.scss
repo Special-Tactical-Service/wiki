@@ -267,6 +267,10 @@ h1 {
       margin-bottom: 12px;
     }
 
+    ul, ol {
+      margin: 24px 0;
+    }
+
     li > p {
       padding: 0;
       margin-bottom: 8px;
@@ -350,6 +354,7 @@ h1 {
 
     .infobox {
       padding: 4px 16px;
+      margin-bottom: 12px;
       border-width: 0 0 0 2px;
       border-style: solid;
       border-radius: 1px;
