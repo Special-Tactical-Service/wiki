@@ -1,5 +1,3 @@
-import {addDirectLinks} from "../util/directlink";
-
 const welcomeArticleId = "0odQzx3aLO";
 
 export const CacheStore = {
@@ -80,7 +78,7 @@ export const CacheStore = {
                         published: result.article.published,
                         updated: result.article.mod_time,
                         tags: result.article.tags,
-                        content: addDirectLinks(result.content.content)
+                        content: result.content.content
                     });
                 });
         }
