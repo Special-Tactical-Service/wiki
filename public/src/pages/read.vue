@@ -39,6 +39,7 @@
     import {addDirectLinks} from "../util/directlink.js";
     import {idFromSlug} from "../util/slug.js";
     import {stsLayout, stsTag} from "../components";
+    import {copyToClipboard} from "../util/directlink";
 
     const scrollDistance = 60;
 
@@ -59,6 +60,9 @@
             "$route.params.id": function(value) {
                 let id = idFromSlug(value);
                 this.loadArticle(id);
+            },
+            "$route.hash": function() {
+                this.scrollToAnchor();
             }
         },
         mounted() {
@@ -76,7 +80,11 @@
                     this.tags = result.article.tags;
                     this.content = addDirectLinks(result.content.content);
                     this.buildToc();
-                    this.scrollToAnchor();
+
+                    this.$nextTick(() => {
+                        this.scrollToAnchor();
+                        this.addCopyAnchor();
+                    });
                 })
                 .catch(() => {
                     this.$router.push("/notfound");
@@ -94,27 +102,41 @@
             },
             scrollToAnchor() {
                 if(this.$route.hash) {
-                    setTimeout(() => {
-                        let anchor = this.$route.hash.replace("%20", " ").substr(1).toLowerCase();
-                        let headlinesH2 = this.$refs.content.getElementsByTagName("h2");
-                        let headlinesH3 = this.$refs.content.getElementsByTagName("h3");
+                    let anchor = decodeURIComponent(this.$route.hash).substr(1).toLowerCase();
+                    console.log(anchor);
 
-                        for(let node of headlinesH2) {
-                            if(node.innerText.toLowerCase() === anchor) {
-                                let top = node.getBoundingClientRect().top+window.scrollY-scrollDistance;
-                                window.scrollTo({top, behavior: "smooth"});
-                                return;
-                            }
-                        }
+                    if(this.scrollToAnchorHeadline(anchor, this.$refs.content.getElementsByTagName("h2"))) {
+                        return;
+                    }
 
-                        for(let node of headlinesH3) {
-                            if(node.innerText.toLowerCase() === anchor) {
-                                let top = node.getBoundingClientRect().top+window.scrollY-scrollDistance;
-                                window.scrollTo({top, behavior: "smooth"});
-                                return;
-                            }
-                        }
-                    }, 500);
+                    if(this.scrollToAnchorHeadline(anchor, this.$refs.content.getElementsByTagName("h3"))) {
+                        return;
+                    }
+
+                    this.scrollToAnchorHeadline(anchor, this.$refs.content.getElementsByTagName("h4"))
+                }
+            },
+            scrollToAnchorHeadline(anchor, headlines) {
+                for(let node of headlines) {
+                    let headline = node.innerText.toLowerCase().substr(0, node.innerText.length-2);
+
+                    if(headline === anchor) {
+                        let top = node.getBoundingClientRect().top+window.scrollY-scrollDistance;
+                        window.scrollTo({top, behavior: "smooth"});
+                        return true;
+                    }
+                }
+
+                return false;
+            },
+            addCopyAnchor() {
+                let links = this.$refs.content.getElementsByClassName("clipboard-link");
+
+                for(let link of links) {
+                    link.addEventListener("click", () => {
+                        let location = window.location.href.replace(/#.*$/, "");
+                        copyToClipboard(`${location}#${link.getAttribute("text")}`);
+                    });
                 }
             }
         }
