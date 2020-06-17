@@ -1,6 +1,6 @@
 import {addDirectLinks} from "../util/directlink";
 
-const welcomeArticleId = "0D3aPP0alx";
+const welcomeArticleId = "0odQzx3aLO";
 
 export const CacheStore = {
     state: {
