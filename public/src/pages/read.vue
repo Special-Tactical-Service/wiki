@@ -135,7 +135,8 @@
                 for(let link of links) {
                     link.addEventListener("click", () => {
                         let location = window.location.href.replace(/#.*$/, "");
-                        copyToClipboard(`${location}#${link.getAttribute("text")}`);
+                        let url = encodeURI(`${location}#${link.getAttribute("text")}`);
+                        copyToClipboard(url);
                     });
                 }
             }
