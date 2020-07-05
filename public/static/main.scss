@@ -367,26 +367,26 @@ h1 {
       & > p {
         margin: 8px 0;
       }
+    }
 
-      &--red {
-        border-color: $red;
-        background: $red-5;
-      }
+    .red {
+      border-color: $red;
+      background: $red-5;
+    }
 
-      &--green {
-        border-color: $green;
-        background: $green-5;
-      }
+    .green {
+      border-color: $green;
+      background: $green-5;
+    }
 
-      &--blue {
-        border-color: $blue;
-        background: $blue-5;
-      }
+    .blue {
+      border-color: $blue;
+      background: $blue-5;
+    }
 
-      &-orange {
-        border-color: $orange;
-        background: $orange-5;
-      }
+    .orange {
+      border-color: $orange;
+      background: $orange-5;
     }
   }
 }
