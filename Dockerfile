@@ -13,7 +13,15 @@ ENV CGO_ENABLED=0
 RUN go build -ldflags "-s -w" main.go
 
 # build frontend
-RUN cd /go/src/github.com/special-tactical-service/wiki/public && npm i && npm rebuild node-sass && npm run build
+RUN cd /go/src/github.com/special-tactical-service/wiki/public && \
+	npm i && \
+	npm rebuild node-sass && \
+	npm run build
+RUN rm -r /go/src/github.com/special-tactical-service/wiki/public/node_modules && \
+	rm -r /go/src/github.com/special-tactical-service/wiki/public/src && \
+	rm /go/src/github.com/special-tactical-service/wiki/public/package.json && \
+	rm /go/src/github.com/special-tactical-service/wiki/public/package-lock.json && \
+	rm /go/src/github.com/special-tactical-service/wiki/public/webpack.config.js
 
 FROM alpine
 RUN apk update && \
