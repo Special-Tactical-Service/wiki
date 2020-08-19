@@ -1,4 +1,4 @@
-const welcomeArticleId = "0odQzx3aLO";
+const welcomeArticleId = "0DdK545gZ2";
 
 export const CacheStore = {
     state: {

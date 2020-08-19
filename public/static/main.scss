@@ -6,11 +6,11 @@ $font_color: #000;
 $max_width: 1400px;
 $search_width: 300px;
 $content_padding: 0 20px;
-$sts_blue: rgba(50, 92, 132, 1);
-$sts_blue_dark: rgba(36, 66, 95, 1);
-$sts_light_grey: rgba(250, 250, 250, 1);
-$sts_dark_grey: rgba(45, 45, 45, 1);
-$blue: #0066cc;
+$sm_blue: #c5d730;
+$sm_blue_dark: #aebe2a;
+$sm_light_grey: rgba(250, 250, 250, 1);
+$sm_dark_grey: rgba(45, 45, 45, 1);
+$blue: $sm_blue_dark;
 $blue-5: rgba(0, 102, 204, 0.05);
 $green: #12b94a;
 $green-5: rgba(18, 185, 74, 0.05);
@@ -33,13 +33,13 @@ html, body {
   font-size: $font_size;
   color: $font_color;
   line-height: 1.5;
-  background: $sts_light_grey;
+  background: $sm_light_grey;
 }
 
 .menu {
   width: 100%;
   height: 50px;
-  background: $sts_blue;
+  background: $sm_blue;
   position: fixed;
   top: 0;
   left: 0;
@@ -70,9 +70,10 @@ html, body {
         width: 40px;
         height: 40px;
         margin: 5px 10px;
-        background: url("../static/logo.png");
+        background: url("../static/skalar-logo.svg");
         background-size: cover;
-        filter: invert(1) grayscale(100%);
+        //filter: invert(1) grayscale(100%);
+        filter: brightness(0) invert(1);
       }
 
       &-text {
@@ -82,7 +83,7 @@ html, body {
     }
 
     .logo:hover {
-      background: $sts_blue_dark;
+      background: $sm_blue_dark;
     }
 
     .search {
@@ -138,7 +139,7 @@ html, body {
       }
 
       a:hover {
-        background: $sts_blue_dark;
+        background: $sm_blue_dark;
       }
     }
   }
@@ -169,7 +170,7 @@ html, body {
 .footer {
   text-align: center;
   font-size: 12px;
-  background: $sts_dark_grey;
+  background: $sm_dark_grey;
   padding: 40px;
   margin: 200px 0 0 0;
   color: #fff;
@@ -301,7 +302,7 @@ h1 {
       }
 
       th {
-        background: $sts_blue;
+        background: $sm_blue;
         color: #fff;
       }
     }
@@ -335,7 +336,7 @@ h1 {
       }
 
       &:hover {
-        color: $sts_blue_dark;
+        color: $sm_blue_dark;
       }
     }
 
@@ -478,6 +479,11 @@ h1 {
 
 .card-green {
   border-color: $green;
+}
+
+iframe {
+  width: 100%;
+  min-height: 500px;
 }
 
 @import "_mobile";

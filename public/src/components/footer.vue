@@ -1,8 +1,8 @@
 <template>
     <div class="footer">
-        <span>&copy; 2020 Special Tactical Service</span>
-        <a href="https://sts.wtf/index.php?datenschutzerklaerung/" target="_blank">{{$t("link_imprint")}}</a>
-        <a href="https://sts.wtf/index.php?datenschutzerklaerung/" target="_blank">{{$t("link_privacy")}}</a>
+        <span>&copy; 2020 skalar marketing</span>
+        <a href="https://skalar.marketing/impressum" target="_blank">{{$t("link_imprint")}}</a>
+        <a href="https://skalar.marketing/datenschutz" target="_blank">{{$t("link_privacy")}}</a>
         <a href="https://emvi.com/" target="_blank">{{$t("link_powered_by")}}</a>
     </div>
 </template>

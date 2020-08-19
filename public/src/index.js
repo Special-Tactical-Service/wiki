@@ -16,7 +16,7 @@ Vue.use(VueI18n);
 Vue.use(VueMoment);
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
-let emvi = new EmviClient(STS_WIKI_CLIENT_ID, STS_WIKI_CLIENT_SECRET, STS_WIKI_ORGANIZATION);
+let emvi = new EmviClient(SM_WIKI_CLIENT_ID, SM_WIKI_CLIENT_SECRET, SM_WIKI_ORGANIZATION);
 
 Vue.mixin({
 	data() {

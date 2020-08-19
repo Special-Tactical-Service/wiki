@@ -22,7 +22,7 @@ const (
 	indexFile       = "public/index.html"
 	rootDirPrefix   = "/"
 	logTimeFormat   = "2006-01-02_15:04:05"
-	envPrefix       = "STS_WIKI_"
+	envPrefix       = "SM_WIKI_"
 )
 
 var (
@@ -33,7 +33,7 @@ var (
 func configureLog() {
 	logbuch.SetFormatter(logbuch.NewFieldFormatter(logTimeFormat, "\t\t"))
 	logbuch.Info("Configure logging...")
-	level := strings.ToLower(os.Getenv("STS_WIKI_LOGLEVEL"))
+	level := strings.ToLower(os.Getenv("SM_WIKI_LOGLEVEL"))
 
 	if level == "debug" {
 		logbuch.SetLevel(logbuch.LevelDebug)
@@ -55,7 +55,7 @@ func logEnvConfig() {
 
 func loadBuildJs() {
 	logbuch.Info("Loading build.js...")
-	watchBuildJs = os.Getenv("STS_WIKI_WATCH_BUILD_JS") != ""
+	watchBuildJs = os.Getenv("SM_WIKI_WATCH_BUILD_JS") != ""
 	content, err := ioutil.ReadFile(buildJsFile)
 
 	if err != nil {
@@ -63,9 +63,9 @@ func loadBuildJs() {
 	}
 
 	buildJs = make([]byte, 0)
-	buildJs = append(buildJs, []byte(fmt.Sprintf("var STS_WIKI_CLIENT_ID='%s';", os.Getenv("STS_WIKI_CLIENT_ID")))...)
-	buildJs = append(buildJs, []byte(fmt.Sprintf("var STS_WIKI_CLIENT_SECRET='%s';", os.Getenv("STS_WIKI_CLIENT_SECRET")))...)
-	buildJs = append(buildJs, []byte(fmt.Sprintf("var STS_WIKI_ORGANIZATION='%s';", os.Getenv("STS_WIKI_ORGANIZATION")))...)
+	buildJs = append(buildJs, []byte(fmt.Sprintf("var SM_WIKI_CLIENT_ID='%s';", os.Getenv("SM_WIKI_CLIENT_ID")))...)
+	buildJs = append(buildJs, []byte(fmt.Sprintf("var SM_WIKI_CLIENT_SECRET='%s';", os.Getenv("SM_WIKI_CLIENT_SECRET")))...)
+	buildJs = append(buildJs, []byte(fmt.Sprintf("var SM_WIKI_ORGANIZATION='%s';", os.Getenv("SM_WIKI_ORGANIZATION")))...)
 	buildJs = append(buildJs, content...)
 }
 
@@ -99,13 +99,13 @@ func setupRouter() *mux.Router {
 func configureCors(router *mux.Router) http.Handler {
 	logbuch.Info("Configuring CORS...")
 
-	origins := strings.Split(os.Getenv("STS_WIKI_ALLOWED_ORIGINS"), ",")
+	origins := strings.Split(os.Getenv("SM_WIKI_ALLOWED_ORIGINS"), ",")
 	c := cors.New(cors.Options{
 		AllowedOrigins:   origins,
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
-		Debug:            strings.ToLower(os.Getenv("STS_WIKI_CORS_LOGLEVEL")) == "debug",
+		Debug:            strings.ToLower(os.Getenv("SM_WIKI_CORS_LOGLEVEL")) == "debug",
 	})
 	return c.Handler(router)
 }
@@ -113,17 +113,17 @@ func configureCors(router *mux.Router) http.Handler {
 func start(handler http.Handler) {
 	logbuch.Info("Starting server...")
 
-	if strings.ToLower(os.Getenv("STS_WIKI_TLS")) == "true" {
+	if strings.ToLower(os.Getenv("SM_WIKI_TLS")) == "true" {
 		logbuch.Info("TLS enabled")
 		certmagic.DefaultACME.Agreed = true
-		certmagic.DefaultACME.Email = os.Getenv("STS_WIKI_TLS_EMAIL")
+		certmagic.DefaultACME.Email = os.Getenv("SM_WIKI_TLS_EMAIL")
 		certmagic.DefaultACME.CA = certmagic.LetsEncryptProductionCA
 
-		if err := certmagic.HTTPS(strings.Split(os.Getenv("STS_WIKI_DOMAIN"), ","), handler); err != nil {
+		if err := certmagic.HTTPS(strings.Split(os.Getenv("SM_WIKI_DOMAIN"), ","), handler); err != nil {
 			logbuch.Fatal("Error starting server", logbuch.Fields{"err": err})
 		}
 	} else {
-		if err := http.ListenAndServe(os.Getenv("STS_WIKI_HOST"), handler); err != nil {
+		if err := http.ListenAndServe(os.Getenv("SM_WIKI_HOST"), handler); err != nil {
 			logbuch.Fatal("Error starting server", logbuch.Fields{"err": err})
 		}
 	}

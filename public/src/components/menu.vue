@@ -8,7 +8,7 @@
             <div class="menu-wrapper-links">
                 <router-link to="/articles">{{$t("link_articles")}}</router-link>
                 <router-link to="/lists">{{$t("link_lists")}}</router-link>
-                <a href="https://sts.wtf/" target="_blank">{{$t("link_website")}}</a>
+                <a href="https://skalar.marketing/" target="_blank">{{$t("link_website")}}</a>
             </div>
             <sts-search></sts-search>
         </div>
@@ -26,10 +26,10 @@
 <i18n>
     {
         "de": {
-            "logo_text": "sTs Wiki",
+            "logo_text": "skalar marketing",
             "link_articles": "Artikel",
             "link_lists": "Listen",
-            "link_website": "Webseite"
+            "link_website": "Website"
         }
     }
 </i18n>

@@ -4,7 +4,7 @@
             <div class="article">
                 <div class="article-title">
                     <h1>{{welcomeArticle.title}}</h1>
-                    <a :href="'https://sts.emvi.com/read/'+welcomeArticle.id" target="_blank">{{$t("view_on_emvi")}}</a>
+                    <a :href="'https://skalar.emvi.com/read/'+welcomeArticle.id" target="_blank">{{$t("view_on_emvi")}}</a>
                 </div>
                 <div class="article-info">
                     {{welcomeArticle.views}} {{$t("views")}} -
