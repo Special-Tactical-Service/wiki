@@ -1,6 +1,6 @@
 # skalar marketing Wiki
 
-https://skalar.marketing/
+http://skalar.marketing/
 
 ## License
 
