@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/caddyserver/certmagic"
 	"github.com/emvi/logbuch"
 	"github.com/gorilla/mux"
@@ -63,9 +62,9 @@ func loadBuildJs() {
 	}
 
 	buildJs = make([]byte, 0)
-	buildJs = append(buildJs, []byte(fmt.Sprintf("var SM_WIKI_CLIENT_ID='%s';", os.Getenv("SM_WIKI_CLIENT_ID")))...)
+	/*buildJs = append(buildJs, []byte(fmt.Sprintf("var SM_WIKI_CLIENT_ID='%s';", os.Getenv("SM_WIKI_CLIENT_ID")))...)
 	buildJs = append(buildJs, []byte(fmt.Sprintf("var SM_WIKI_CLIENT_SECRET='%s';", os.Getenv("SM_WIKI_CLIENT_SECRET")))...)
-	buildJs = append(buildJs, []byte(fmt.Sprintf("var SM_WIKI_ORGANIZATION='%s';", os.Getenv("SM_WIKI_ORGANIZATION")))...)
+	buildJs = append(buildJs, []byte(fmt.Sprintf("var SM_WIKI_ORGANIZATION='%s';", os.Getenv("SM_WIKI_ORGANIZATION")))...)*/
 	buildJs = append(buildJs, content...)
 }
 

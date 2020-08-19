@@ -10,6 +10,10 @@ import {getI18n} from "./i18n";
 import {SearchStore} from "./store/search";
 import {CacheStore} from "./store/cache";
 
+const SM_WIKI_CLIENT_ID = "J8U5aYxyfdW9Outof9DL";
+const SM_WIKI_CLIENT_SECRET = "IEWlpiNJTlzZJgaPNxtKnyo4UjhQOsk4t6lNOBw8z2mTtcsXMXdfIkAfrGYlkfca";
+const SM_WIKI_ORGANIZATION = "skalar";
+
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueI18n);
