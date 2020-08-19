@@ -1,6 +1,6 @@
-# Special Tactical Service Wiki
+# skalar marketing Wiki
 
-The Wiki of sTs.
+https://skalar.marketing/
 
 ## License
 
