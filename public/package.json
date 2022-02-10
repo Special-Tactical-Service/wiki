@@ -33,7 +33,7 @@
     "@kazupon/vue-i18n-loader": "^0.5.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.1.0",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "resolve-url-loader": "^3.1.2",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
